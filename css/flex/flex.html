@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex 布局</title>
+    <style>
+        .flex-direction{
+            display: flex;
+            width: 600px;
+            background: #adf;
+            /* flex-direction 属性决定主轴的方向，也就是项目的排列方向 */
+            flex-direction: row-reverse;
+        }
+        .item{
+            width: 50px;
+            height: 50px;
+            background: aqua;
+            margin: 10px;
+            text-align: center;
+            line-height: 50px;
+        }
+        .flex-warp{
+            display: flex;
+            width: 300px;
+            height: 150px;
+            margin-top: 10px;
+            background: #f0a;
+            /* flex-wrap属性定义，如果一条轴线排不下，如何换行 */
+            flex-wrap: wrap-reverse;
+        }
+        .justify-content{
+            display: flex;
+            width: 300px;
+            height: 150px;
+            margin-top: 10px;
+            background: #a6f;
+            flex-wrap: wrap;
+            /* justify-content属性定义了项目在主轴上的对齐方式 */
+            justify-content: space-around;
+        }
+        .align-items{
+            display: flex;
+            width: 600px;
+            height: 100px;
+            margin-top: 10px;
+            background: #690;
+            /* align-items属性定义项目在交叉轴上如何对齐 */
+            align-items: flex-end;
+        }
+        .align-content{
+            display: flex;
+            width: 400px;
+            height: 200px;
+            margin-top: 10px;
+            background: #f0f;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            /* align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用 */
+            align-content: flex-end;
+        }
+        .order{
+            display: flex;
+            width: 800px;
+            height: 200px;
+            margin-top: 10px;
+            background: #aaa;
+            flex-wrap: wrap;
+        }
+        .order .item{
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+            text-align: center;
+            line-height: 100px;
+        }
+        .one{
+             /* order属性定义项目的排列顺序。数值越小，排列越靠前，默认为 0 */
+            order: 100;
+        }
+        .two{
+            order: 20;
+        }
+        .three{
+            order: 3;
+        }
+        .flex{
+            width: 600px;
+            height: 300px;
+            margin-top: 10px;
+            background: #aff;
+        }
+        .top,.bottom{
+            display: flex;
+            height: 100px;
+            margin: 20px 0;
+        }
+        .top .left{
+            width: 100px;
+            /* flex-grow属性定义项目的放大比例，默认为 0，即如果存在剩余空间，也不放大 */
+            flex-grow: 0;
+            background: #dfa;
+        }
+        .top .center{
+            width: 100px;
+            flex-grow: 1;
+            background: #b9f;
+        }
+        .top .right{
+            width: 100px;
+            flex-grow: 1;
+            background: #f60;
+        }
+        .bottom .left{
+            width: 300px;
+            /* flex-shrink属性定义了项目的缩小比例，默认为 1，即如果空间不足，该项目将缩小 */
+            flex-shrink: 1;
+            background: #dfa;
+        }
+        .bottom .center{
+            width: 300px;
+            flex-shrink: 0;
+            background: #690;
+        }
+        .bottom .right{
+            width: 300px;
+            flex-shrink: 1;
+            background: #f0a;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-direction">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+    <div class="flex-warp">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+    <div class="justify-content">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+    <div class="align-items">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+    <div class="align-content">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+    </div>
+    <div class="order">
+        <div class="item one">1</div>
+        <div class="item two">2</div>
+        <div class="item three">3</div>
+        <div class="item three">3</div>
+        <div class="item two">2</div>
+        <div class="item one">1</div>
+    </div>
+    <div class="flex">
+        <div class="top">
+            <div class="left"></div>
+            <div class="center"></div>
+            <div class="right"></div>
+        </div>
+        <div class="bottom">
+            <div class="left"></div>
+            <div class="center"></div>
+            <div class="right"></div>
+        </div>
+    </div>
+</body>
+</html>
