@@ -7,11 +7,3 @@
 [css triggers](https://csstriggers.com/)  
 [css render](https://segmentfault.com/a/1190000014520786)  
 [css filter](https://github.com/chokcoco/iCSS/issues/30)
-
-### LESS
-
-[less](https://less.bootcss.com/#%E6%A6%82%E8%A7%88)
-
-### SASS/SCSS
-
-[SASS 概览](https://www.sass.hk/guide/)
