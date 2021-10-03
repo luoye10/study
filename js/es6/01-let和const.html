@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>let和const</title>
+</head>
+<body>
+    <script>
+        // let 声明的变量只在 let 命令所在的代码块内有效
+        var a = [];
+        for(var i = 0; i < 10; i++){
+            a[i] = function(){
+                console.log(i);
+            }
+        }
+        a[6]();
+        var a = [];
+        for(let i = 0; i < 10; i++){
+            a[i] = function(){
+                console.log(i);
+            }
+        }
+        a[6]();
+
+        for(let i = 0; i < 5; i++){ // 循环变量 i
+            // 函数内部的变量 i 与循环变量 i 不在同一个作用域
+            let i = 'add'; // 函数内部的变量 i
+            console.log(i);
+        }
+
+        /**
+         *      
+         *      同一个作用域内不能用 let 重复声明一个变量
+         *      let 声明的变量一定要在声明后使用，不存在变量提升
+         *      在代码块内，使用 let 命令声明变量之前，该变量都是不可用的
+         *      这在语法上被称为  暂时性死区( temporal dead zone，简称 TDZ )
+         *          暂时性死区的本质就是，只要一进入当前作用域，所要使用的变量就已经存在了，
+         *          但是不可获取，只有等到声明变量的那一行代码出现，才可以获取和使用该变量
+         * 
+         * */ 
+        var b = 10;
+        if(true){
+            // b = 'big';
+            // console.log(b);
+            let b;
+            console.log(b);
+            b = 20;
+            console.log(b);
+        }
+
+        // 块级作用域的用处
+        function f(){
+            let m = 1;
+            if(true){
+                let m = 2;
+            }
+            console.log(m)
+        }
+        f();
+
+        // 内层变量覆盖外层变量
+        var c = 30;
+        function fun(){
+            console.log(c);
+            if(false){
+                var c = 'come';
+            }
+        }
+        fun();
+
+        // 用来计数的循环变量泄露为全局变量
+        var str = 'hello';
+        for(var i = 0; i < str.length; i++){
+            console.log(str[i]);
+        }
+        console.log(i);
+
+        // 块级作用域和函数声明
+        function fn(){
+            console.log('我是外部函数');
+        }
+        (function(){
+            if(false){
+                let fn = function(){
+                    console.log('我是内部函数');
+                }
+            }
+            fn();
+        }())
+        // (function(){
+        //     if(false){
+        //         function fn(){
+        //             console.log('我是内部函数');
+        //         }
+        //     }
+        //     fn();
+        // }())
+
+        /**
+         *
+         *      const 声明一个只读的常量，声明之后值是不能改变的，也不能重复声明
+         *      只在声明所在的块级作用域内有效
+         *      一定要在声明后使用，不存在变量提升
+         * 
+         * */ 
+        function bar(){
+            const n = 10;
+            if(true){
+                const n = 20;
+                console.log(n);
+            }
+            console.log(n);
+        }
+        bar()
+        const arr = [10,20,30];
+        arr[1] = 54;
+        console.log(arr)
+
+        /**
+         * 
+         *      顶层对象
+         *          浏览器环境指的是 window 对象
+         *          Node 指的是 global 对象
+         *      在 ES5 中，顶层对象的属性与全局变量时等价的，这就带来了几个很大的问题：
+         *          1、不能在编译时报出变量未声明的错误，只有运行时才知道
+         *          2、程序员很容易就不知不觉创造了全局变量
+         *          3、顶层对象的属性时可以到处读写的，不利于模块化编程
+         *          4、window 对象指的是浏览器的窗口对象，顶层对象是一个有试题含义的对象
+         * 
+         *      ES6 为了改变这一点，
+         *          一方面规定，为了保持兼容性，var命令和 function命令声明的全局变量，依旧是顶层对象的属性
+         *          另一方面规定，let命令、const命令、class命令声明的全局变量，不属于顶层对象的属性
+         *          
+         * 
+        */
+        var m = 1;
+        let n = 10;
+        console.log(window.m + ', ' + window.n);
+    </script>
+</body>
+</html>
