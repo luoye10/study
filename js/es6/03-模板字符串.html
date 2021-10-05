@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板字符串</title>
+</head>
+<body>
+    <script>
+        // 模板字符串中可以解析变量
+        let name = '张三';
+        console.log(`我的名字是${name}`);
+
+        // 模板字符串中可以换行
+        let person = {
+            name: '李四',
+            gender: '男',
+            age: 30
+        }
+        let html = `<div>
+            <span>${person.name}</span>
+            <span>${person.gender}</span>
+            <span>${person.age}</span>
+        </div>`
+        console.log(html);
+
+        // 模板字符串中可以调用函数
+        let mySay = () => {
+            return '今天天气真好';
+        }
+        console.log(`${mySay()},适合出游`);
+
+        // 如果需要引用模板字符串本身，在需要时执行，可以写成函数
+        let fun = (name) => {
+            console.log(`hello ${name}!`);
+        }
+        fun('tom');
+
+        // 如果模板字符串大括号内部是一个字符串，将会原样输出
+        console.log(`hello ${'world'}`);
+    </script>
+</body>
+</html>
