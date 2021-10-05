@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width :200px;
+            height :200px;
+            margin :10px;
+            display :inline-block;
+        }
+        .box{
+            width:50px ;
+            height: 50px;
+            margin: 75px;
+        }
+        .add{
+            background: aqua;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <button class="add">添加</button>
+    <script>
+        var add = document.getElementById('add');
+        add.onclick = function(){
+            ce(5);
+        }
+        function ce(n){
+            for(j = 0;j < n;j++){
+                var el = create('div');
+                el.style.background = color();
+                document.body.appendChild(el);
+                var al = create('div');
+                al.className = 'box';
+                al.style.background = color();
+                el.appendChild(al);
+            }
+            return div; 
+        }
+        function create(name){
+            return document.createElement(name);
+        }
+        function color(){
+            var c = '#' , str = '0123456789abcdef';
+            for(i = 0 ; i < 3 ; i++){
+                c += str[r(0,15)];
+            }
+            return c;
+        }
+        function r(min,max){
+            return Math.floor(Math.random() * (max - min) + min);
+        }        
+    </script>
+</body>
+</html>
