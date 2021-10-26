@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>promise</title>
+    <title> promise </title>
 </head>
 <body>
     <script>
@@ -19,44 +19,19 @@
          * 
         */
         // 实例化 promise 对象
-        let p = new Promise(function(resolve, reject){
-            setTimeout(function(){
-                let data = '数据';
-                resolve(data);
+        let p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                // let data = '数据';
+                // resolve(data);
                 let err = '读取数据失败';
                 reject(err);
             })
         });
         // 调用 promise 对象的 then 方法
-        p.then(function(value){
+        p.then(value => {
             console.log(value);
-        },function(reason){
-            console.log(reason);
-        });
-
-        // 封装 ajax 请求
-        let p1 = new Promise((resolve, reject) => {
-            let xhr = new XMLHttpRequest();
-            xhr.open("GET", "https://api.apiopen.top/getJoke");
-            xhr.onreadystatechange = function() {
-                if(xhr.readyState === 4) {
-                    if(xhr.status === 200){
-                        // 如果成功
-                        let obj = JSON.parse(xhr.response);
-                        resolve(obj);
-                    } else {
-                        // 如果失败
-                        reject(xhr.status);
-                    }
-                }
-            }
-            xhr.send();
-        });
-        // 指定回调
-        p1.then(function(value){
-            console.log(value);
-        }, function(reason){
-            console.log(reason);
+        }, reason => {
+            console.error(reason);
         });
 
         function pr(t) {
@@ -71,9 +46,9 @@
                 }, t)
             })
         }
-        pr(1000).then(function(value){
+        pr(1000).then(value => {
             console.log(value);
-        }, function(reason){
+        }, reason => {
             console.log(reason);
         });
     </script>
