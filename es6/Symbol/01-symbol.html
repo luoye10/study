@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>symbol</title>
+    </head>
+    <body>
+        <script>
+            // Symbol ES6 引入的一种原始数据类型，表示独一无二的值
+            // 创建一个 Symbol
+            let s = Symbol('str');
+            console.log(s, typeof s);
+            let ss = Symbol.for('string');
+            console.log(ss, typeof ss);
+
+            // Symbol 函数前不能用 new ，会报错
+            // Symbol 是一个原始类型的值，不是对象
+
+            // Symbol 可以接受一个字符串作为参数，表示对 Symbol 实例的描述
+            let a = Symbol('foo'),
+                b = Symbol('bar');
+            console.log(a, b);
+
+            // Symbol 的参数如果是一个对象，会调用对象的 toString 方法，
+            // 将其转化为字符串，然后生成一个 Symbol 值
+            let obj = {
+                name: 'lily',
+                age: 20,
+                toString() {
+                    return 'add';
+                }
+            };
+            let sym = Symbol(obj);
+            console.log(sym);
+
+            // Symbol.prototype.description 直接返回 Symbol 的描述
+            let s1 = Symbol('字符串');
+            console.log(s1.description);
+
+            // Symbol 函数的参数只是表示对当前 Symbol 值的描述，相同参数的 Symbol 函数的返回值不相等
+            let s2 = Symbol('fn'),
+                s3 = Symbol('fn');
+            console.log(s2 === s3);
+
+            // Symbol 值不能与其他类型的值进行运算，会报错
+            let sym1 = Symbol('My Symbol');
+            // console.log('your symbol is' + sym1);
+            // console.log(`you symbol is ${sym1}`);
+            // console.log(sym1 + sym1);
+
+            // Symbol 值可以显示转换为字符串和布尔值，不能转换为数值
+            let sym2 = Symbol('My Symbol');
+            console.log(String(sym2));
+            console.log(!Boolean(sym2));
+            // console.log(Number(sym2));
+
+            /**
+             *
+             *  js的数据类型
+             *      USONB   you are so niubility
+             *      U   undefined
+             *      S   string symbol
+             *      O   object
+             *      N   null number
+             *      B   boolean
+             *
+             * */
+        </script>
+    </body>
+</html>

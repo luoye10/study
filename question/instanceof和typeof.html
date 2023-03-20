@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Obj(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        let auto = new Obj('lily', 20);
+        /**
+         * 
+         *  instanceof 运算符
+         *      实例对象 instanceof 构造函数
+         *          检测构造函数的原型是否在实例对象的原型链上
+         *          是就返回 true，不是返回 false
+         * 
+         * */ 
+        console.log(auto instanceof Obj);
+        console.log(auto instanceof Object);
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> promise </title>
+</head>
+<body>
+    <script>
+        /**
+         * 
+         *  Promise
+         *      承诺，这个承诺会在未来有一个明确的答复，这个承诺有三种状态
+         *          等待中 ( pending )
+         *          完成了 ( resolved )
+         *          拒绝了 ( rejected )
+         *      这个承诺从等待状态变成其他状态就不能更改
+         * 
+        */
+        // 实例化 promise 对象
+        let p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                // let data = '数据';
+                // resolve(data);
+                let err = '读取数据失败';
+                reject(err);
+            })
+        });
+        // 调用 promise 对象的 then 方法
+        p.then(value => {
+            console.log(value);
+        }, reason => {
+            console.error(reason);
+        });
+
+        function pr(t) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const r = Math.random();
+                    if (r > 0.5) {
+                        resolve(r);
+                    } else {
+                        reject('error');
+                    }
+                }, t)
+            })
+        }
+        pr(1000).then(value => {
+            console.log(value);
+        }, reason => {
+            console.log(reason);
+        });
+    </script>
+</body>
+</html>

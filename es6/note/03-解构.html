@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>解构赋值</title>
+    </head>
+    <body>
+        <script>
+            // ES6 允许按照一定模式从数组和对象中提取值，对变量进行赋值，这被称为结构赋值
+            const { log } = console;
+
+            // 数组的解构赋值
+            let [a, b, c] = [10, 50, 15];
+            log(a + ', ' + c);
+            let [x, ...y] = [15, 56, 88, 55, 65];
+            log(x + ', ' + '(' + y + ')');
+            let [m, , , n] = [15, 58, 88, 74];
+            log(m + ', ' + n);
+            let [w, t] = [45, 50, 86, 99];
+            log(w + ', ' + t);
+            // 如果解构不成功，变量的值就是 undefined
+            let [f, l, p] = [10];
+            log(f, l, p);
+            // 解构赋值可以指定默认值
+            let [first, last = 'hello'] = [20];
+            log(first, last);
+            // ES6 内部使用严格相等运算符( === )，判断一个位置是否有值，
+            // 所以，只有当一个数组成员严格等于 undefined，默认值才会生效
+            // 如果一个数组成员是 null，默认值不会生效，null 不严格等于 undefined
+            let [num = 1] = [undefined];
+            log(num);
+            let [sum = 1] = [null];
+            log(sum);
+            // 默认值可以引用解构赋值的其他变量，但该变量必须已经声明
+            let [o = 1, r = o] = [];
+            log(o, r);
+
+            // 对象的解构赋值
+            let person = {
+                name: 'lily',
+                age: 20,
+                gender: '女'
+            };
+            let { name: nm, age: ag, gender: gd } = person;
+            log(nm, ag, gd);
+            log('hello');
+            let obj = {
+                arr: [
+                    'hello',
+                    {
+                        k: 'world'
+                    }
+                ]
+            };
+            let {
+                arr,
+                arr: [str, { k }]
+            } = obj;
+            log(arr, str, k);
+            let node = {
+                loc: {
+                    start: {
+                        line: 'line',
+                        index: 'index'
+                    }
+                }
+            };
+            let {
+                loc,
+                loc: { start },
+                loc: {
+                    start: { line }
+                }
+            } = node;
+            log(loc, start, line);
+            // 嵌套赋值
+            let obj2 = {},
+                arr2 = [];
+            ({ foo: obj2.prop, bar: arr2[0] } = { foo: 100, bar: true });
+            log(obj2, arr2);
+            // 对象解构也可以指定默认值，生效条件是，对象的属性值严格等于 undefined
+            let { am, bm = 3 } = { am: 5 };
+            log(am, bm);
+            let { an: bn = 10 } = { an: 20 };
+            log(bn);
+            let { message: msg = 'hello world' } = {};
+            log(msg);
+            let { at = 2 } = { at: undefined };
+            log(at);
+            let { bt = 20 } = { bt: null };
+            log(bt);
+            // 注意点
+            // 1. 如果要将一个已经声明的变量用于解构赋值，必须非常小心
+            // 错误写法
+            // let aw;
+            // {aw} = {aw:1}
+            // 正确写法
+            let aw;
+            ({ aw } = { aw: 1 });
+            log(aw);
+            // 2. 允许等号左边的模式中，不放置任何变量名
+            ({} = [1, 2]);
+            ({} = 'home');
+            // 3. 数组本质是特殊的对象，因此可以对数组进行对象属性的解构
+            let newArr = [1, 2, 3];
+            let { 0: first1, [newArr.length - 1]: last1 } = newArr;
+            log(first1, last1);
+
+            // 字符串的解构赋值
+            let [one, two, three, four, five] = 'hello';
+            log(one, two, three, four, five);
+            // 类似数组的对象都有一个 length 属性，也可以对这个属性解构赋值
+            let { length: len } = 'hello';
+            log(len);
+
+            // 数值和布尔值的解构赋值
+            // 解构赋值时，如果等号右边是数值和布尔值，会先转为对象
+            let { toString: s } = 10086;
+            log(s === Number.prototype.toString);
+            let { toString: s2 } = false;
+            log(s2 === Boolean.prototype.toString);
+            // 解构赋值的规则，只要等号右边的值不是对象或数组，就先将其转为对象
+            // 由于 undefined 和 null 无法转为对象，对它们解构赋值，会报错
+            // let { prop: pr } = undefined;
+            // let { prop: po } = null;
+            // log(pr, po);
+
+            // 函数参数的解构赋值
+            function add([one, two]) {
+                return one + two;
+            }
+            log(add([12, 42]));
+            let arr3 = [
+                [15, 16],
+                [42, 46]
+            ].map(([ax, bx]) => ax + bx);
+            log(arr3);
+            // 函数参数解构的默认值
+            function move({ ay = 4, by = 5 } = {}) {
+                log([ay, by]);
+            }
+            move();
+            move({});
+            move({ ay: 10 });
+            move({ ay: 10, by: 20 });
+            function remove({ ay, by } = { ay: 4, by: 5 }) {
+                log([ay, by]);
+            }
+            remove();
+            remove({});
+            remove({ ay: 10 });
+            remove({ ay: 10, by: 20 });
+
+            // 解构赋值的用途
+            // 1、交换变量的值
+            let [e, q] = [10, 15];
+            [e, q] = [q, e];
+            log(e, q);
+
+            // 2、可以从函数返回多个值
+            function fun() {
+                return [1, 2, 3];
+            }
+            let [a1, a2, a3] = fun();
+            log(a1, a2, a3);
+            function fn() {
+                return {
+                    foo: 'hello',
+                    bar: 'world'
+                };
+            }
+            let { foo, bar } = fn();
+            log(foo, bar);
+
+            // 3、函数参数的定义
+            function fo([b1, b2, b3]) {
+                log(b1, b2, b3);
+            }
+            fo([3, 4, 5]);
+            function br({ bb, cc, aa }) {
+                log(aa, bb, cc);
+            }
+            br({ aa: 7, bb: 8, cc: 9 });
+
+            // 4、提取 JSON 数据
+            let jsonData = {
+                id: 10,
+                status: 'yes',
+                data: {
+                    start: 10,
+                    end: 20
+                }
+            };
+            let { id, status, data: object } = jsonData;
+            log(id, status, object);
+
+            // 5、遍历 Map 结构
+            let map = new Map();
+            map.set('myName', 'tom');
+            map.set('work', 'teacher');
+            for (let [key, value] of map) {
+                log(key + ' is ' + value);
+            }
+            // 如果只想获取键名或者键值，可以写成下面这样
+            // 获取键名
+            for (let [key] of map) {
+                log(key);
+            }
+            // 获取键值
+            for (let [, value] of map) {
+                log(value);
+            }
+        </script>
+    </body>
+</html>

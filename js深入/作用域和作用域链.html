@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         *  作用域
+         *      决定了代码区块中变量和其他资源的可见性
+         *      作用域就是一个独立的地盘，让变量不会外泄
+         *      作用域最大的用处是隔离变量，不同作用域的同名变量不会有冲突
+         * 
+         * */
+        // 全局作用域：在代码中任何地方都能访问到的对象拥有全局作用域
+        // 1、最外层函数和在最外层函数外面定义的变量拥有全局作用域
+        var outVariable = '我是最外层变量'      // 最外层变量
+        function outFun(){                    // 最外层函数
+            var inVariable = '我是内层变量';   // 内层函数
+            function inFun() {
+                console.log(inVariable);
+            }
+            inFun();
+        }
+        console.log(outVariable);
+        outFun();
+        // console.log(inVariable);
+        // inFun();
+
+        // 2、所有未定义直接赋值的变量拥有全局作用域
+        function outFun2() {
+            variable = '未定义直接赋值的变量';
+            var inVariable2 = '内层变量2';
+        }
+        outFun2();
+        console.log(variable);
+        // console.log(inVariable2);
+
+        // 3、所有 window 对象的属性拥有全局作用域
+        // 全局作用域会污染全局命名空间，容易引起命名冲突
+
+        // 函数作用域：声明在函数内部的变量
+        // 内层作用域可以访问外层作用域的变量，反之不行
+        function fun() {
+            var name = '乘风破浪';
+            function innerFun() {
+                console.log(name);
+            }
+            innerFun();
+        }
+        // innerFun();
+
+        // 注意：块语句(即'{}'中间的语句)，如 if 和 switch 条件语句或者 for 和 while 循环语句，不会创建新的作用域
+        if(true) {
+            var name2 = 'lily';
+        }
+        console.log(name2);
+
+        // 块级作用域：可以通过 let 和 const 声明，所声明的变量在指定块的作用域外无法被访问
+
+        /**
+         *  作用域链
+         *      自由变量
+         *          当前作用域没有的变量称之为自由变量
+         *          要到创建这个函数的作用域取值
+         *      作用域链
+         *          寻找变量时，先在当前作用域寻找，如果没有，就向父级作用域寻找
+         *          如果父级作用域也没有，再一层一层往上找，直到找到全局作用域，如果还没有，就宣布放弃
+         *          这种由多个作用域构成的链表就是作用域链
+         * 
+         *  作用域和执行上下文
+         *      JS的执行分为解释和执行两个阶段
+         *      解释阶段：
+         *          词法分析
+         *          语法分析
+         *          作用域规则确定
+         *      执行阶段：
+         *          创建执行上下文
+         *          执行函数代码
+         *          垃圾回收
+         *  
+         * 区别：执行上下文在运行时确定，随时可能改变，
+         *      作用域在定义时确定，并且不会发生改变
+         * 
+         * 一个作用域下可能包含若干个上下文环境，
+         * 有可能从来没有过上下文环境(函数从来没有被调用过)，
+         * 有可能有过，现在函数被调用完毕后，上下文环境被销毁了，
+         * 有可能同时存在一个或多个(闭包)，
+         * 同一个作用域下，不同的调用会产生不同的执行上下文环境，继而产生不同的变量的值
+         *   
+         * 
+        */
+
+
+    </script>
+</body>
+</html>

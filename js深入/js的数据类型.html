@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            /**
+        
+            js的数据类型
+                基本数据类型
+                    Number
+                    String
+                    Boolean
+                    Undefined
+                    Null
+                    Symbol( es6 新增，表示独一无二的值)
+
+                引用数据类型
+                    统称为 Object 对象，包含对象、数组和函数
+
+                检验数据类型
+                    typeof
+                    instanceof
+                    constructor
+                    Object.prototype.toString.call()
+        
+        */
+
+            // 基本数据类型
+            // 1、值是不可变的
+            let name = 'javascript';
+            name.toUpperCase();
+            console.log(name); // 输出 javascript
+
+            // 2、存放在栈区
+            // 原始数据类型直接存储在栈(stack)中的简单数据段，
+            // 占据空间小、大小固定，属于被频繁使用数据，所以放入栈中存储
+
+            // 3、值的比较
+            let a = 1;
+            let b = true;
+            console.log(a == b); // 输出 true
+            console.log(a === b); // 输出 false
+            // ==  只进行值的比较，会进行数据类型的转换
+            // === 不只进行值的比较，还会进行数据类型的比较
+
+            // 引用数据类型
+            // 1、值是可变的
+            let c = {
+                age: 20
+            };
+            c.age = 200;
+            console.log(c.age); // 输出 200
+
+            // 2、同时保存在栈内存和堆内存
+            // 引用数据类型存储在堆(heap)中的对象,
+            // 占据空间大、大小不固定，如果存储在栈中，将会影响程序运行的性能；
+            // 引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。
+            // 当解释器寻找引用值时，会首先检索其在栈中的地址，取得地址后从堆中获得实体
+
+            // 3、比较是引用的比较
+            // 当从一个变量向另一个变量赋引用类型的值时，同样也会将存储在变量中的对象的值复制一份放到为新变量分配的空间中
+            let m = {
+                name: 'lily'
+            };
+            let n = m;
+            n.name = 'tom';
+            console.log(m, n);
+            console.log(m.name == n.name); // 输出 true
+            // 如果取消某一个变量对于原对象的引用，不会影响到另一个变量
+            m = 1;
+            console.log(m, n);
+
+            // 检验数据类型
+            // typeof 返回一个表示数据类型的字符串，不能判断 null，undefined
+            console.log(typeof new Date());
+            console.log(typeof []);
+        </script>
+    </body>
+</html>

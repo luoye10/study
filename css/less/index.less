@@ -1,0 +1,35 @@
+@p: 50px;
+@b: box;
+@import 'style.less';
+.@{b} {
+    .set(300px, #6af);
+    margin: 10px auto;
+    padding: @p;
+    .outer {
+        .set(200px, #f90);
+        padding: @p;
+        .inner {
+            .set(100px, average(red, blue));
+            &:hover {
+                background: #3fa;
+            }
+        }
+    }
+}
+.item {
+    .set(100px, #9af);
+    margin: 20px;
+}
+.test:extend(.item) {
+    border: 2px solid black;
+    &:hover {
+        background: darken(#9af, 50%);
+    }
+}
+@l: list;
+.@{l} {
+    width: @p + 100;
+    height: @p + 50;
+    margin: 10px;
+    background: darken(average(red, yellow), 10%);
+}

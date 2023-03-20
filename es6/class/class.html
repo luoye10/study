@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>class</title>
+    </head>
+    <body>
+        <script>
+            class Counter {
+                count = 0;
+                get value() {
+                    console.log('get value');
+                }
+                method() {
+                    return this.count++;
+                }
+            }
+            let c = new Counter();
+            c.value;
+            console.log(c.method());
+
+            // Mixin 模式，多个对象合成一个新的对象
+            let o1 = {
+                name: 'david'
+            };
+            let o2 = {
+                age: 22
+            };
+            let o3 = {
+                gender: '男'
+            };
+            let newObj = { ...o1, ...o2, ...o3 };
+            console.log(newObj);
+        </script>
+    </body>
+</html>

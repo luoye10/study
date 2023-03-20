@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 全局环境下的 this
+        function f1(){
+            // 非严格模式
+            console.log(this);
+        }
+        function f2() {
+            'use strict'
+            console.log(this);
+        }
+        f1(); // window
+        f2(); // undefined
+
+        let foo = {
+            bar: 10,
+            fn: function() {
+                console.log(this);
+                console.log(this.bar);
+            }
+        }
+        // fn 函数在 foo 对象中作为方法被引用，但是在赋值给 fn1 之后，fn1 的执行仍然是在 window 的全局环境中
+        // 在执行函数时，如果函数中的 this 是被上一级的对象调用，this 就指向上一级的对象，否则就指向全局环境
+        let fn1 = foo.fn;
+        fn1();
+        foo.fn();
+
+        // 上下文对象调用中的 this
+        let person = {
+            name: 'lily',
+            brother: {
+                name: 'lucy',
+                fn: function() {
+                    return this.name;
+                }
+            }
+        }
+        console.log(person.brother.fn()); // this 指向最后调用它的对象，输出 lucy
+        let o1 = {
+            text: '第一个',
+            fn: function() {
+                return this.text;
+            }
+        }
+        let o2 = {
+            text: '第二个',
+            fn: function() {
+                return o1.fn();
+            }
+        }
+        let o3 = {
+            text: '第三个',
+            fn: function() {
+                var fn = o1.fn;
+                return fn();
+            }
+        }
+        console.log(o1.fn()); // this 指向 o1，输出 第一个
+        console.log(o2.fn()); // this 指向 o1，输出 第一个
+        console.log(o3.fn()); // this 指向 window，输出 undefined
+
+        // 构造函数和 this
+        // 如果构造函数显示地返回一个值，且返回的是一个对象，this 指向这个返回的对象
+        // 如果返回的不是一个对象，this 指向实例
+        function Foo() {
+            this.name = 'tom';
+            let o = {};
+            return o;
+        }
+        let ins = new Foo();
+        console.log(ins.name); // 输出 undefined
+        function Fo() {
+            this.name = 'tom';
+            return 1;
+        }
+        let inst = new Fo();
+        console.log(inst.name); // 输出 tom
+
+        // 箭头函数中的 this 指向
+        // 根据外层上下文作用域来决定
+        let fo = {
+            fn: function() {
+                setTimeout(() => {
+                    console.log(this);
+                })
+            }
+        }
+        fo.fn();
+    </script>
+</body>
+</html>

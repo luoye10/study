@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 1000px;
+        }
+        .item{
+            width: 400px;
+            height: 200px;
+            background: #000;
+            color: white;
+            font-size: 30px;
+            margin: 10px auto;
+            text-align: center;
+            line-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="item"></div>
+    <script>
+        // 对于短时间内连续触发的事件，防抖的含义就是在某个时间期限内，事件处理函数只执行一次
+        // 监听浏览器滚动事件，返回当前滚动条到顶部的距离 
+        function debounce(fun, delay) {
+            let timer;
+            return function() {
+                if(timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(fun, delay);
+            }
+        }
+        function showTop() {
+            let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+            console.log('滚动条的位置: ' + scrollTop);
+        }
+        window.onscroll = debounce(showTop, 1000);
+
+        // 如果短时间内大量触发同一事件，函数执行一次之后，在指定期限内不再触发，直到这段时间之后才重新生效
+        let count = 1;
+        let item = document.getElementsByClassName('item')[0];
+        function throttle(fn, time) {
+            let timer;
+            return function(){
+                if(timer) {
+                    return
+                }
+                timer = setTimeout(() => {
+                    fn();
+                    timer = null;
+                }, time);
+            }
+        }
+        function get(){
+            item.innerHTML = count++;
+        }
+        item.addEventListener('mousemove', throttle(get, 1000));
+    </script>
+</body>
+</html>

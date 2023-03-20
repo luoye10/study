@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组遍历</title>
+</head>
+<body>
+    <script>
+        /**
+         *  遍历数组，就是将数组中所有的元素都取出来
+        */
+        var arr = ['孙悟空','哪吒','杨戬','雷震子','李靖']
+        for(var i = 0; i < arr.length; i++){
+            console.log(arr[i])
+        }
+
+        function Person(name,age){
+            this.name = name;
+            this.age = age
+        }
+        Person.prototype.toString = function(){
+            return 'Person = [name :' + this.name + ',age :' + this.age + ']'
+        }
+        var per = new Person('孙悟空',589)
+        console.log(per)
+    </script>
+</body>
+</html>

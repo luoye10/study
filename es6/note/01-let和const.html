@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>let和const</title>
+    </head>
+    <body>
+        <script>
+            // let 声明变量
+            let a, b, c;
+            let d = 1;
+            let e = 'hello',
+                f = [];
+
+            // 1.变量不能重复声明
+            let boy = '李白';
+            // let boy = '杜甫';
+
+            // 2.块级作用域
+            // if, else, while, for 语句用 let 声明的变量也具有块级作用域，只在代码块内有效
+            {
+                let girl = '李清照';
+                console.log(girl);
+            }
+            // console.log(girl);
+
+            // 3.不存在变量提升
+            // console.log(star);
+            let star = '名人';
+            console.log(star);
+
+            // 4.不影响作用域链
+            {
+                let school = '尚硅谷';
+                function fun() {
+                    console.log(school);
+                }
+                fun();
+            }
+
+            for (let i = 0; i < 5; i++) {
+                // 循环变量 i
+                // 函数内部的变量 i 与循环变量 i 不在同一个作用域
+                let i = 'add'; // 函数内部的变量 i
+                console.log(i);
+            }
+
+            // 块级作用域的用处
+            function br() {
+                let m = 1;
+                if (true) {
+                    let m = 2;
+                }
+                console.log(m);
+            }
+            br();
+
+            // 内层变量覆盖外层变量
+            var h = 30;
+            function fun() {
+                console.log(h);
+                if (false) {
+                    var h = 'come';
+                }
+            }
+            fun();
+
+            // 用来计数的循环变量泄露为全局变量
+            var str = 'hello';
+            for (var i = 0; i < str.length; i++) {
+                console.log(str[i]);
+            }
+            console.log(i);
+
+            // 块级作用域和函数声明
+            function fn() {
+                console.log('我是外部函数');
+            }
+            (function () {
+                if (false) {
+                    let fn = function () {
+                        console.log('我是内部函数');
+                    };
+                }
+                fn();
+            })();
+            // (function(){
+            //     if(false){
+            //         function fn(){
+            //             console.log('我是内部函数');
+            //         }
+            //     }
+            //     fn();
+            // }())
+
+            // const 声明常量
+            let SCHOOL = '千峰';
+
+            // 1.一定要赋初始值
+            // const A;
+            const A = 10;
+
+            // 2. 一般常量要用大写(潜规则) 使用小写不会报错
+            const x = 100;
+
+            // 3. 常量的值不能修改
+            SCHOOL = 'ATQIANFENG';
+
+            // 4. 块级作用域
+            {
+                const PLAYER = 'ui';
+                console.log(PLAYER);
+            }
+            // console.log(PLAYER);
+
+            // 5. 对数组和对象的元素修改，不算对常量的修改，不会报错
+            const arr = [10, 20, 30, 'hello'];
+            arr.push('tom');
+            console.log(arr);
+            const obj = {
+                name: 'lily',
+                age: 20
+            };
+            obj.gender = '女';
+            console.log(obj);
+
+            /**
+             *
+             *      顶层对象
+             *          浏览器环境指的是 window 对象
+             *          Node 指的是 global 对象
+             *      在 ES5 中，顶层对象的属性与全局变量时等价的，这就带来了几个很大的问题：
+             *          1、不能在编译时报出变量未声明的错误，只有运行时才知道
+             *          2、程序员很容易就不知不觉创造了全局变量
+             *          3、顶层对象的属性时可以到处读写的，不利于模块化编程
+             *          4、window 对象指的是浏览器的窗口对象，顶层对象是一个有试题含义的对象
+             *
+             *      ES6 为了改变这一点，
+             *          一方面规定，为了保持兼容性，var命令和 function命令声明的全局变量，依旧是顶层对象的属性
+             *          另一方面规定，let命令、const命令、class命令声明的全局变量，不属于顶层对象的属性
+             *
+             *
+             */
+            var m = 1;
+            let n = 10;
+            console.log(window.m + ', ' + window.n);
+        </script>
+    </body>
+</html>

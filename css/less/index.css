@@ -1,0 +1,45 @@
+.box {
+  width: 300px;
+  height: 300px;
+  box-sizing: border-box;
+  background: #6af;
+  margin: 10px auto;
+  padding: 50px;
+}
+.box .outer {
+  width: 200px;
+  height: 200px;
+  box-sizing: border-box;
+  background: #f90;
+  padding: 50px;
+}
+.box .outer .inner {
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  background: #800080;
+}
+.box .outer .inner:hover {
+  background: #3fa;
+}
+.item,
+.test {
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  background: #9af;
+  margin: 20px;
+}
+.test {
+  border: 2px solid black;
+}
+.test:hover {
+  background: #001999;
+}
+.list {
+  width: 150px;
+  height: 100px;
+  margin: 10px;
+  background: #cc6600;
+}
+/*# sourceMappingURL=./index.css.map */

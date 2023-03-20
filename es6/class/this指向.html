@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // 类的方法内部如果有 this，默认指向类的实例，但是单独使用该方法，可能报错
+            class Logger {
+                constructor() {
+                    this.printName = this.printName.call(this);
+                }
+                printName(name = 'here') {
+                    this.print(`hello ${name}`);
+                }
+                print(text) {
+                    console.log(text);
+                }
+            }
+            let logger = new Logger();
+            let { print } = logger;
+            print();
+
+            // 在一个方法前加上 static 关键字，表示该方法不会被实例继承，直接通过类来调用，这被称为 '静态方法'
+            // 如果静态方法包含 this 关键字，这个 this 指的是类，不是实例
+            // 静态方法可以与非静态方法重名
+            class Fun {
+                static method() {
+                    console.log('hello');
+                }
+                static bar() {
+                    this.baz();
+                }
+                static baz() {
+                    console.log('world');
+                }
+                baz() {
+                    console.log('come on!');
+                }
+            }
+            // 父类的静态方法可以被子类继承
+            class Bar extends Fun {}
+            Fun.method();
+            Fun.bar();
+            Bar.method();
+        </script>
+    </body>
+</html>

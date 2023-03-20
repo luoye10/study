@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串的一些方法</title>
+</head>
+<body>
+    <script>
+        /**
+         * 
+         *  includes()
+         *      表示是否找到了参数字符串，返回布尔值
+         *  startsWith()
+         *      表示参数字符串是否在原字符串的头部，返回布尔值
+         *  endsWith()
+         *      表示参数字符串是否在原字符串的尾部，返回布尔值
+         * 
+        */
+        let str = 'hello world';
+        console.log(str.includes('l'));
+        console.log(str.startsWith('h'));
+        console.log(str.endsWith('d'));
+
+        // repeat() 表示将字符串重复 n 次，返回一个新字符串
+        // 如果参数是小数，会向下取整
+        // 如果参数是字符串，会先转换为数字
+        console.log('name'.repeat(3));
+        console.log('an'.repeat(2.7));
+        console.log('on'.repeat('5'));
+        console.log('in'.repeat('sa'));
+
+        /**
+         * 
+         *  如果某个字符串不够指定长度，会在头部或尾部补全
+         *      padStart()用于头部补全，
+         *      padEnd()用于尾部补全
+         *      一共两个参数
+         *          第一个参数是字符串补全生效的最大长度，
+         *          第二个参数是用来补全的字符串
+         * 
+         * */ 
+        console.log('a'.padStart(4,'0'));
+        console.log('a'.padEnd(4,'0'));
+
+        // 如果原字符串的长度，等于或大于最大长度，则字符串补全不生效，返回原字符串
+        console.log('xxxx'.padStart(4,'0'));
+
+        /**
+         * 
+         *  trim() 消除头部和尾部的空格
+         *  trimStart() 消除字符串头部的空格，
+         *  trimEnd() 消除尾部的空格。
+         *      返回的都是新字符串，不会修改原始字符串
+         * 
+        */
+        console.log('  hello world  '.trim());
+        console.log('  hello world  '.trimStart());
+        console.log('  hello world  '.trimEnd());
+    </script>
+</body>
+</html>

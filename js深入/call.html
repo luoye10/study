@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> call 的模拟实现 </title>
+</head>
+<body>
+    <script>
+        Function.prototype.myCall = function(context) {
+            if(typeof this !== 'function') {
+                throw new TypeError('Error');
+            }
+            context = context || window;
+            context.fn = this;
+            const args = [...arguments].slice(1);
+            const result = context.fn(...args);
+            delete context.fn;
+            return result;
+        };
+        var value = 10;
+        let obj = {
+            value: 100
+        };
+        function bar(name, age) {
+            console.log(this.value);
+            return {
+                value: this.value,
+                name: name,
+                age: age
+            }
+        }
+        bar.myCall(null);
+        console.log(bar.myCall(obj, 'lily', 20));
+    </script>
+</body>
+</html>

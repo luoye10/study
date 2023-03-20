@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #6af;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        // 鼠标滚轮向下滚动，box 变长
+        // 鼠标滚轮向上滚动，box 变短
+        var box = document.getElementsByClassName('box')[0];
+        /**
+         *  onmousewheel 鼠标滚轮滚动的事件，火狐不支持
+         *  火狐中使用 DOMMouseScroll 来绑定滚轮滚动事件，需要通过 addEventListener()来绑定
+         *      
+         * 
+         * */ 
+        // 绑定滚轮滚动的事件
+        box.onmousewheel = function(e){
+            e = event || window.event;
+            /**
+             * 
+             * 判断鼠标滚轮滚动的方向
+             *      event.wheelDelta 可以获取鼠标滚轮滚动的方向(火狐不支持)
+             *          向上滚  120
+             *          向下辊  -120
+             *      event.detail(火狐支持)
+             *          向上滚  -3
+             *          向下滚  3
+             * 
+             * */ 
+            // 向下滚动， box 变长
+            if(e.wheelDelta < 0 || e.detail > 0){
+                box.style.height = box.clientHeight + 10 + 'px';
+            }else{
+                // 向上滚动， box 变短
+                box.style.height = box.clientHeight - 10 + 'px';
+            }      
+            /**
+             * 
+             * addEventListener()绑定的响应函数
+             *      要使用 event.preventDefault()来取消默认行为
+             *      IE8 不支持
+             * 
+             * */   
+            e.preventDefault && e.preventDefault();      
+            //  滚轮滚动时，如果浏览器有滚动条，滚动条会随之滚动，这是浏览器的默认行为
+            return false;
+        };
+        addEvent(box,'DOMMouseScroll',box.onmousewheel)
+        function addEvent(obj, eventStr, callback){
+            if(obj.addEventListener){
+                // 大部分浏览器的方式
+                obj.addEventListener(eventStr,callback,false);
+            }else{
+                // this 是谁由调用方式决定
+                // IE8及以下
+                obj.attachEvent('on' + eventStr,function(){
+                    // 在匿名函数中调用回调函数
+                    callback.call(obj);
+                });
+            }
+        }; 
+    </script>
+</body>
+</html>

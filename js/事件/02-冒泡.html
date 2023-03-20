@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件冒泡Document</title>
+    <style>
+        .out{
+            width: 400px;
+            height: 400px;
+            background: #aff;
+        }
+        .inner{
+            width: 200px;
+            height: 200px;
+            background: #6af;
+            margin: 100px;
+            box-sizing: border-box;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #0ff;
+            margin: 50px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="out">
+        out
+        <div class="inner">
+            inner
+            <div class="box">box</div>
+        </div>
+    </div>
+    <script>
+        /**
+         * 
+         * 事件的冒泡 (Bubble)
+         *      冒泡指的就是事件的向上传导
+         *      后代元素上的事件被触发时，其祖先元素上的相同事件也会触发
+         * 
+        */
+        var out = document.getElementsByClassName('out')[0],
+        inner = document.getElementsByClassName('inner')[0],
+        box = document.getElementsByClassName('box')[0];
+        out.onclick = function(){
+            console.log('out');
+            
+        }
+        inner.onclick = function(){
+            console.log('inner');
+        }
+        box.onclick = function(e){
+            e = event || window.event;
+            console.log('box');
+            stopBubble(e);
+        }
+        // 跨浏览器兼容的阻止事件冒泡的函数
+        function stopBubble(e){
+            return e.cancelBubble || e.stopPropagation();
+        }
+    </script>
+</body>
+</html>

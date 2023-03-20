@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>遍历</title>
+    </head>
+    <body>
+        <script>
+            /**
+             *
+             *      Symbol 作为属性名，遍历对象的时候，该属性不会出现在 for...in、for..of 循环中
+             *      也不会被 Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回
+             *      Object.getOwnPropertySymbols() 方法，可以获取指定对象的所有 Symbol 属性名
+             *      该方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值
+             *
+             */
+            let obj = {};
+            let a = Symbol('a'),
+                b = Symbol('b');
+            obj[a] = 'hello';
+            obj[b] = 'world';
+            for (let i in obj) {
+                console.log(i);
+            }
+            console.log(Object.getOwnPropertyNames(obj));
+            console.log(Object.getOwnPropertySymbols(obj));
+
+            // Reflect.ownKeys()方法可以返回所有类型的键名，包括 Symbol 键名
+            // 返回一个数组，成员是所有的属性名
+            let obj2 = {
+                [Symbol('name')]: 'lily',
+                age: 20,
+                gender: '女'
+            };
+            console.log(Reflect.ownKeys(obj2));
+        </script>
+    </body>
+</html>
