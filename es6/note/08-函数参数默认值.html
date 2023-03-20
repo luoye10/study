@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>函数参数默认值</title>
+    </head>
+    <body>
+        <script>
+            const { log } = console;
+            // ES6 允许给函数参数赋值初始值
+            // 1. 形参的初始值(具有默认值的参数，一般位置要靠后)
+            function add(a, b, c = 10) {
+                return a + b + c;
+            }
+            log(add(1, 2));
+
+            // 2. 可以与解构赋值相结合使用
+            function connect({ host = 'atGuiGu.com', username, password }) {
+                log(host);
+                log(username);
+                log(password);
+            }
+            connect({
+                username: 'root',
+                password: '123'
+            });
+        </script>
+    </body>
+</html>

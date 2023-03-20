@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #af0;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        
+        var box = document.getElementsByClassName('box')[0];
+        document.onmousemove = function(e){
+            e = event || window.event;
+            /**
+             * 
+             *  clientX  可以获取鼠标在当前的可见窗口的水平坐标
+             *  clientY  可以获取鼠标在当前的可见窗口的垂直坐标
+             * 
+             *  pageX 鼠标相对于当前页面的水平坐标
+             *  pageY 鼠标相对于当前页面的垂直坐标
+             *      IE8 及以下不支持
+             * 
+            */
+            /**
+             * 
+             *  获取滚动条滚动的距离
+             *      Chrome 认为浏览器的滚动条是 body的  body.scrollTop     
+             *      火狐等浏览器认为是 html 的          documentElement.scrollTop
+             * 
+            */
+            var st = document.body.scrollTop || document.documentElement.scrollTop,
+            sl = document.body.scrollLeft || document.documentElement.scrollLeft;
+            var left = e.clientX,
+            top = e.clientY;
+            box.style.left = left + sl +  'px';
+            box.style.top = top + st + 'px';
+        }
+    </script>
+</body>
+</html>

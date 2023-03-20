@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // 每一个 Symbol 值都是不相等的，Symbol 可以作为标识符，用于对象的属性名，不会出现同名属性
+            let mySymbol = Symbol();
+            let a = {};
+            a[mySymbol] = 'hello';
+            let b = {
+                [mySymbol]: 'hello'
+            };
+            let c = {};
+            Object.defineProperty(c, mySymbol, { value: 'hello' });
+            console.log(a, b, c);
+
+            // Symbol 值作为对象属性名时，不能用电运算符，点运算符后面是字符串
+            // 所以不会读取标识名所指代的那个值
+            let d = {};
+            d.mySymbol = 'world';
+            console.log(d);
+            console.log(d[mySymbol]);
+            console.log(d['mySymbol']);
+
+            // 在对象内部，使用 Symbol 值定义属性时，Symbol 值必须放在方括号中
+            let s = Symbol();
+            let name = {
+                [s]: function (arg) {
+                    console.log(arg);
+                }
+            };
+            name[s](123);
+
+            // 定义一组常量，保证这组常量的值不相等
+            const o = {};
+            o.list = {
+                debug: Symbol('debug'),
+                info: Symbol('info')
+            };
+            console.log(o);
+
+            const red = Symbol('red'),
+                green = Symbol('green');
+            function getColor(color) {
+                switch (color) {
+                    case red:
+                        return red;
+                    case green:
+                        return green;
+                    default:
+                        throw new Error('undefined color');
+                }
+            }
+            console.log(getColor(green));
+            // Symbol 值作为属性名时，该属性是公开属性
+
+            // 向对象添加方法
+            let obj = {};
+            let methods = {
+                up: Symbol(),
+                down: Symbol()
+            };
+            obj[methods.up] = function () {
+                console.log('我可以改变形状');
+            };
+            obj[methods.down] = function () {
+                console.log('我可以快速下降');
+            };
+            console.log(obj);
+
+            let game = {
+                name: '狼人杀',
+                [Symbol('say')]: function () {
+                    console.log('我可以发言');
+                },
+                [Symbol('zibao')]: function () {
+                    console.log('我可以自爆');
+                }
+            };
+            console.log(game);
+        </script>
+    </body>
+</html>

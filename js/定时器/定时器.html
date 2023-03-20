@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn01,.btn02,.btn03,.btn04,.btn05{
+            display: inline-block;
+            width: 150px;
+            height: 30px;
+            background: aqua;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 30px;
+            margin: 20px 10px;
+            cursor: pointer;
+        }
+        .box1{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: absolute;
+            left: 0;
+        }
+        .box2{
+            width: 100px;
+            height: 100px;
+            background: greenyellow;
+            position: absolute;
+            left: 0;
+            top: 300px;
+        }
+        .line{
+            width: 0;
+            height: 500px;
+            border-left: 1px solid black;
+            position: absolute;
+            left: 1000px;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="btn01">box1向右移动</div>
+    <div class="btn02">box1向左移动</div>
+    <div class="btn03">box2向右移动</div>
+    <div class="btn04">box2向左移动</div>
+    <div class="btn05">改变元素属性</div>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="line"></div>
+    <script src="../tool.js"></script>
+    <script>
+        var btn01 = document.getElementsByClassName('btn01')[0],
+        btn02 = document.getElementsByClassName('btn02')[0],
+        btn03 = document.getElementsByClassName('btn03')[0],
+        btn04 = document.getElementsByClassName('btn04')[0],
+        btn05 = document.getElementsByClassName('btn05')[0],
+        box1 = document.getElementsByClassName('box1')[0],
+        box2 = document.getElementsByClassName('box2')[0];
+        addEvent(btn01,'click',function(){
+            move(box1, 'left', 800, 10)
+        })
+        addEvent(btn02,'click',function(){
+            move(box1, 'left', 0, 10)
+        })
+        addEvent(btn03,'click',function(){
+            move(box2, 'left', 800, 20)
+        })
+        addEvent(btn04,'click',function(){
+            move(box2, 'left', 0, 20)
+        })
+        addEvent(btn05,'click',function(){
+            move(box2, 'width', 1000, 10, function(){
+                move(box2, 'height', 500, 10, function(){
+                    move(box2, 'top', 1000, 10, function(){
+                        move(box2, 'top', 300, 10, function(){
+                            move(box2, 'width', 100, 10, function(){
+                                move(box2, 'height', 100, 10)
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    </script>
+</body>
+</html>

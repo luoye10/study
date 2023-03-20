@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,body,ul,li,p{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            position: relative;
+        }
+        li{
+            list-style: none;
+            float: left;
+            background: rgb(22, 196, 89);
+            color: black;
+            border: 1px solid black;
+            height: 20px;
+            font-size: 14px;
+            text-align: center;
+            line-height: 20px;
+            margin: 10px;
+            padding: 5px 3px;
+        }
+        ul:after{
+            clear: both;
+            content: '';
+            display: block;
+        }
+        .inner:nth-child(1){
+            width: 300px;
+            height: 260px;
+            border: 1px solid black;
+            margin: 20px 200px;
+            padding-left: 10px;
+            padding-top: 20px;
+        }
+        .inner:nth-child(2){
+            width: 300px;
+            height: 70px;
+            border: 1px solid black;
+            margin: 10px 200px;
+            padding: 10px 0 5px 10px;
+        }
+        #btnList{
+            width: 300px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 550px;
+        }
+        #btnList button{
+            width: 100%;
+            height: 25px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id='total'>
+        <div class="inner">
+            <p>
+                你喜欢哪个城市
+            </p>
+            <ul id="city">
+                <li id="bj">北京</li>
+                <li>上海</li>
+                <li>东京</li>
+                <li>首尔</li>
+            </ul>
+            <br>
+            <p>
+                你喜欢哪款单机游戏？
+            </p>
+            <ul id="game">
+                <li id="rl">红警</li>
+                <li>实况</li>
+                <li>极品飞车</li>
+                <li>魔兽</li>
+            </ul>
+            <br />
+            <p>
+                你手机的操作系统是？
+            </p>
+            <ul id='phone'><li>IOS</li><li id="android">Android</li><li>Windows Phone</li></ul>
+        </div>
+        <div class="inner">
+            gender:
+            <input type="radio" name='gender' value='male'/>
+            Male
+            <input type="radio" name='gender' value='female'/>
+            female
+            <br>
+            <br>
+            name:
+            <input type="text" name='name' id='username' value='abcde'/>
+        </div>
+    </div>
+    <div id="btnList">
+        <div> <button id='btn01'>查找#bj节点</button></div>  
+        <div> <button id='btn02'>查找所有li节点</button></div>  
+        <div> <button id='btn03'>查找name=gender的所有节点</button></div>  
+        <div> <button id='btn04'>查找#city下所有的li节点</button></div>  
+        <div> <button id='btn05'>返回#city下所有的子节点</button></div>  
+        <div> <button id='btn06'>返回#phone的第一个子节点</button></div>  
+        <div> <button id='btn07'>返回#bj的父节点</button></div>  
+        <div> <button id='btn08'>返回#android的前一个兄弟节点</button></div>  
+        <div> <button id='btn09'>读取#username的value属性值</button></div>  
+        <div> <button id='btn10'>设置#username的value属性值</button></div>  
+        <div> <button id='btn11'>返回#bj的文本值</button></div>  
+    </div>
+    <script>
+        /**
+         * 
+         * innerHTML
+         *      用于获取元素内部的 HTML 代码
+         *      对自结束标签没有意义
+         * 
+         * dom 查询
+         *      获取元素节点(通过 document 对象调用)
+         * 
+         *      getElementById()
+         *          通过 id 属性获取一个元素节点对象
+         * 
+         *      getElementsByTagName()
+         *          根据标签名获取一组元素节点对象
+         *          会返回一个类数组对象，所有查询到的元素都会封装到对象中
+         * 
+         *      getElementsByName()
+         *          通过 name 属性获取一组元素节点对象
+         * 
+        */
+        window.onload = function(){
+            // 查找 #bj 的节点
+            myClick('btn01',function(){
+                var bj = document.getElementById('bj')
+                alert(bj.innerHTML)
+            })
+
+            // 查找所有 li 节点
+            myClick('btn02',function(){
+                var lis = document.getElementsByTagName('li')
+                for(var i = 0; i < lis.length; i++){
+                    alert(lis[i].innerHTML)
+                }
+            })
+
+            // 查找name=gender的所有节点
+        }
+        function myClick(idStr,fun){
+            var idStr = document.getElementById(idStr)
+            idStr.onclick = fun
+        }
+    </script>
+</body>
+</html>

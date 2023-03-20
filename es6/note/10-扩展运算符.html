@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>扩展运算符</title>
+    </head>
+    <body>
+        <div></div>
+        <div></div>
+        <div></div>
+        <script>
+            const { log } = console;
+            // [ ... ] 扩展运算符 能将数组转换为逗号分隔的参数序列
+            let tfBoys = ['王源', '王俊凯', '易烊千玺'];
+            function fun() {
+                log(arguments);
+            }
+            fun(...tfBoys);
+
+            // 数组的合并
+            let kzXD = ['肖央', '王太利'],
+                fhCQ = ['曾毅', '玲花'];
+            let zh = [...kzXD, ...fhCQ];
+            log(zh);
+
+            // 数组的克隆
+            let arr = [1, 2, 3];
+            let newArr = [...arr];
+            log(newArr);
+
+            // 将伪数组转为真数组
+            let divs = document.querySelectorAll('div');
+            let divArr = [...divs];
+            log(divs);
+            log(divArr);
+        </script>
+    </body>
+</html>
