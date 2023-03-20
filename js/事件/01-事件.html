@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .area{
+            width: 400px;
+            height: 100px;
+            border: 1px solid grey;
+        }
+        .show{
+            width: 400px;
+            height: 50px;
+            border: 1px solid grey;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="area"></div>
+    <div class="show"></div>
+    <script>
+        /**
+
+            事件对象
+                事件的响应函数触发时，浏览器会将一个事件对象作为实参传进响应函数
+                事件对象中封装了当前事件相关的一些信息
+
+            鼠标在 area 中移动时，在 show 中显示鼠标的坐标
+
+            onmousemove
+                该事件会在鼠标在元素中移动时被触发
+
+            clientX  可以获取鼠标指针的水平坐标
+            clientY  可以获取鼠标指针的垂直坐标
+        
+        */
+        var area = document.getElementsByClassName('area')[0],
+        show = document.getElementsByClassName('show')[0];
+        area.onmousemove = function(event){
+            /**
+             * IE8及以下的浏览器中，事件对象是作为 window 的属性保存的
+             * 
+            */
+            // 解决事件对象的兼容性问题
+            event = event || window.event;
+            var x = event.clientX,
+            y = event.clientY;
+            show.innerHTML = 'x = ' + x + ' , y = ' + y;
+        }
+    </script>
+</body>
+</html>

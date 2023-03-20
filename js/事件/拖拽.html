@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #aff;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        var box = document.getElementsByClassName('box')[0];
+        drag(box);
+        function drag(obj){
+            //  当鼠标按下时，开始拖拽  onmousedown
+            obj.onmousedown = function(e){
+                // 捕获所有鼠标按下的事件
+                /**
+                 * setCapture()
+                 *      只支持IE，在火狐中也不会报错
+                 *      在chrome中调用会报错
+                 * 
+                */
+                obj.setCapture && obj.setCapture();
+                e = event || window.event;
+                // div 的偏移量
+                var ol = e.clientX - obj.offsetLeft,
+                ot = e.clientY - obj.offsetTop;
+                //  当鼠标移动时，被拖拽元素跟随鼠标移动 onmousemove
+                document.onmousemove = function(e){
+                    e = event || window.event;
+                    var left = e.clientX - ol,
+                    top = e.clientY - ot;
+                    obj.style.left = left + 'px';
+                    obj.style.top = top + 'px';
+                };
+                //  当鼠标松开时，被拖拽元素固定在当前位置 onmouseup
+                document.onmouseup = function(){
+                    // 取消 document 的 onmousemove 事件
+                    document.onmousemove = null;
+                    // 取消 document 的 onmouseup 事件
+                    document.onmouseup = null;
+                    // 鼠标松开时，取消对事件的捕获
+                    obj.releaseCapture && obj.releaseCapture();
+                };
+                // 取消默认行为
+                return false;
+            }; 
+        }
+    </script>
+</body>
+</html>

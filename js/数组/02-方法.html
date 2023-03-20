@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         *  push()
+         *      可以向数组的末尾添加一个或多个元素，返回数组的新长度
+         *      可以将要添加的元素作为方法的参数传递
+         *  
+         * 
+        */
+        var arr = [34,45,56]
+        var result = arr.push(45,25,67)
+        console.log('result = ' + result)
+
+        /**
+         *  pop()
+         *      删除数组的最后一个元素
+         *      将删除的元素作为返回值返回
+        */
+        console.log(arr.pop())
+
+        /**
+         *  unshift()
+         *      向数组开头添加一个或多个元素，返回数组的新长度
+         * 
+        */
+        console.log(arr.unshift('孙悟空'))
+        console.log(arr)
+
+        /**
+         *  shift()
+         *      删除数组的第一个元素
+         *      将删除的元素作为返回值返回
+         * 
+        */
+        console.log(arr.shift())
+        console.log(arr)
+    </script>
+</body>
+</html>

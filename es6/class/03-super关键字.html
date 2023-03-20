@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // super 关键字既可以当函数使用，也可以当对象使用
+            // super 作为函数调用时，代表父类的构造函数
+            // 子类的构造函数必须执行一次 super 函数
+            // super 内部的 this 指的是子类的实例
+            // 作为函数时，super() 只能用在子类的构造函数中
+            class A {
+                constructor() {
+                    return this.name;
+                }
+            }
+            class B extends A {
+                constructor() {
+                    super();
+                }
+            }
+            let a = new A();
+            let b = new B();
+            console.log(a, b);
+
+            // super 作为对象时，在普通方法中，指向父类的原型对象，在静态方法中，指向父类
+            // 定义在父类上的属性和方法，不能用 super 调用
+            // 定义在父类的原型对象上的属性和方法，可以用 super 取到
+            // 在子类普通方法中通过 super 调用父类的方法时，方法内部的 this 指向当前的子类实例
+            // this 指向子类实例，如果通过 super 对属性赋值，super 就是 this
+            class C {
+                constructor() {
+                    this.m = 2;
+                }
+                p() {
+                    return 1;
+                }
+                print() {
+                    console.log(this.m);
+                }
+            }
+            C.prototype.name = 'lily';
+            class D extends C {
+                constructor() {
+                    super();
+                    this.m = 20;
+                    super.m = 200;
+                    console.log(super.m, this.m);
+                }
+                t() {
+                    super.print();
+                }
+                get n() {
+                    return super.m + ', ' + super.name;
+                }
+            }
+            let d = new D();
+            console.log(d.n);
+            d.t();
+            // 如果 super 作为对象，用在静态方法之中，super 指向父类，而不是父类的原型对象
+            class MyParent {
+                static method(msg) {
+                    console.log('static', msg);
+                }
+                method(msg) {
+                    console.log('instance', msg);
+                }
+            }
+            class Child extends MyParent {
+                static method(msg) {
+                    super.method(msg);
+                }
+                method(msg) {
+                    super.method(msg);
+                }
+            }
+            Child.method(11);
+            let child = new Child();
+            child.method(22);
+
+            // 在子类的静态方法中通过 super 调用父类的方法时，方法内部的 this 指向当前的子类，不是子类的实例
+            class Al {
+                constructor() {
+                    this.x = 1;
+                }
+                static print() {
+                    console.log(this.x);
+                }
+            }
+            class Bl extends Al {
+                constructor() {
+                    super();
+                    this.x = 10;
+                }
+                static m() {
+                    super.print();
+                }
+            }
+            Bl.x = 20;
+            Bl.m();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // 类的继承
+            // class 可以通过 extends 关键字实现继承
+            class Parent {
+                constructor(m, n) {
+                    this.m = m;
+                    this.n = n;
+                }
+                sum() {
+                    console.log(this.m + this.n);
+                }
+                say() {
+                    return '我是爸爸';
+                }
+            }
+            class Son extends Parent {
+                constructor(m, n) {
+                    super(m, n);
+                    this.m = m;
+                    this.n = n;
+                }
+                say() {
+                    console.log(super.say() + '的儿子');
+                }
+                subtract() {
+                    console.log(this.m - this.n);
+                }
+            }
+            let son = new Son(10, 2);
+            son.sum();
+            son.subtract();
+            son.say();
+
+            // 原生构造函数的继承
+            class MyArray extends Array {
+                constructor(...args) {
+                    super(...args);
+                }
+            }
+            let arr = new MyArray();
+            arr = [10, 20, 30];
+            console.log(arr.length);
+
+            class MyError extends Error {
+                constructor(msg) {
+                    super();
+                    this.msg = msg;
+                    this.name = this.constructor.name;
+                }
+            }
+            let err = new MyError('这是一个错误');
+            console.log(err.msg + ', ' + err.name);
+
+            // 继承 Object 的子类，有一个行为差异
+            // ES6 改变了 Object 构造函数的行为，
+            // 如果不是通过 new Object() 这种形式调用，Object 构造函数会忽略参数
+            // 所以无法通过 super 向 Object 父类传值
+            class MyObj extends Object {
+                constructor() {
+                    super(...arguments);
+                }
+            }
+            let obj = new MyObj({ name: 'tom' });
+            let result = obj.name === 'tom';
+            console.log(result);
+
+            // Object.getPrototypeOf() 可以从子类上获取父类
+            let re = Object.getPrototypeOf(obj);
+            let res = Object.getPrototypeOf(obj) === MyObj;
+            let rst = Object.getPrototypeOf(MyObj) === Object;
+            console.log(re, res, rst);
+        </script>
+    </body>
+</html>

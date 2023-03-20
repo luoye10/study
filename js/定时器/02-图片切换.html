@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img{
+            width: 200px;
+            height: 200px;
+        }
+        .start,.stop{
+            display: inline-block;
+            width: 50px;
+            height: 30px;
+            background: #adf;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+    </style>
+</head>
+<body>
+    <img src="../img/1.jpg" class="img">
+    <div class="box">
+        <div class="start">开始</div>
+        <div class="stop">停止</div>
+    </div>
+    <script>
+        var img = document.getElementsByClassName('img')[0],
+        start = document.getElementsByClassName('start')[0],
+        stop = document.getElementsByClassName('stop')[0];
+        // 保存图片的路径
+        var imgArr = ["../img/1.jpg","../img/2.jpg","../img/3.jpg","../img/4.jpg","../img/5.jpg"]
+        // 保存当前图片的索引
+        var index = 0;
+        var timer;
+        start.onclick = function(){
+            // 开启定时器之前，需要将当前元素上的其他定时器关闭
+            clearInterval(timer);
+            timer = setInterval(function(){
+                index++;
+                if(index == imgArr.length){
+                    index = 0;
+                }
+                img.src = imgArr[index];
+            },1000);
+        };
+        stop.onclick = function(){
+            // clearInterval() 可以接收任意参数
+            clearInterval(timer);
+        }
+    </script>
+</body>
+</html>

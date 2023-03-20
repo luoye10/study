@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+            数组( Array )
+                数组也是一个对象
+                普通对象使用字符串作为属性名
+                数组使用数字作为索引来操作元素
+                索引
+                    从 0 开始的整数
+                数组的存储性能比普通对象好
+        */
+
+        var arr = [12,23,34,45,56,67,78,89] 
+        // 使用 typeof 检查一个数组，会返回 Object
+        console.log(typeof arr)
+        console.log(arr[2])
+
+        /**
+            获取数组的长度
+                数组.length
+
+            对于连续的数组，使用 length 可以获取数组的长度
+            非连续的数组，使用 length 会获取到数组的最大的索引 + 1
+        */ 
+        console.log(arr.length)
+
+        /**
+            修改 length 
+                如果修改的 length 大于原长度，多出部分会空出来
+                如果修改的 length 小于原长度，多出部分会被删除
+        */
+        arr.length = 10
+        console.log(arr.length)
+
+        /*
+            向数组的最后一个位置添加元素
+                数组[数组.length] = 值
+            数组中的元素可以是任意数据类型
+        */
+        arr[arr.length] = ['hello',true]
+        console.log(arr)
+
+        // 也可以是对象
+        var arr2 = [{name:'小明'},{name:'小红'},{name:'小胖'}]
+        console.log(arr2)
+
+        // 也可以是一个函数
+        var arr3 = [
+            function(){
+                console.log(1)
+            },
+            function(){
+                console.log(2)
+            }
+        ]
+        console.log(arr3)
+
+        // 也可以是数组
+        var arr4 = [[23,33,34],[13,15,64],[45,56,74]]
+        console.log(typeof arr4)
+    </script>
+</body>
+</html>
