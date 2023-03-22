@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <input type="text" class="el" value="a" />
+        <script>
+            const el = document.querySelector('.el');
+            const obj = {
+                value: 'a'
+            };
+            let v = obj.value;
+            el.addEventListener('input', () => {
+                const val = el.value;
+                obj.value = val;
+            });
+            const set = val => {
+                v = val;
+                el.value = val;
+            };
+            const get = () => {
+                return v;
+            };
+            for (let key in obj) {
+                Object.defineProperty(obj, key, {
+                    get: get,
+                    set: set
+                });
+            }
+        </script>
+    </body>
+</html>
