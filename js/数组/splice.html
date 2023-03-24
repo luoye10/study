@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            /**
+             *
+             *  splice()
+             *      通过删除，替换现有元素或者添加新的元素来修改数组，
+             *      以数组形式返回被修改的内容，会改变原数组
+             *
+             *  参数
+             *      第一个参数  start
+             *          指定修改的开始位置，如果超出数组的长度，从末尾开始添加内容
+             *          如果是负值，表示从数组末位开始的第几位
+             *          如果负数的绝对值大于数组的长度，表示从0开始
+             *
+             *      第二个参数 deleteCount(可选)
+             *          整数，表示要移除的数组元素的个数
+             *          如果省略或者大于等于 start 之后的元素的总数，从 start 后面的都删除(含第 start 位)
+             *          如果是 0 或者负数，则不移除元素，至少该新添加一个元素
+             *
+             *      第三，第四...后面的参数(可选)
+             *          要添加进数组的元素，从 start 位开始，如果不指定，则只删除元素
+             *
+             */
+            // 添加元素
+            let arr = ['hello', '李白', 22, true, '孙悟空'];
+            arr.splice(6, 1, '猪八戒');
+            console.log(arr);
+            let arr2 = ['张三', true, '李四', 100];
+            console.log(arr2.splice(2, -2, [1, 2]));
+            console.log(arr2);
+
+            // 删除元素
+            let arr3 = [1, 2, 3, 4, 5];
+            arr3.splice(0, 4);
+            console.log(arr3);
+            let arr4 = [11, 22, 33, 44];
+            arr4.splice(1);
+            console.log(arr4);
+
+            // 替换元素
+            let arr5 = [11, 'hello', true, 100];
+            console.log(arr5.splice(2, 1, '222'));
+            console.log(arr5);
+        </script>
+    </body>
+</html>
