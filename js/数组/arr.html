@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script>
-        function push2(arr, val){
-            arr[arr.length] = val;
-            return arr;
-        }
-        console.log(push2([1,2],3));
-    </script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            function push2(arr, val) {
+                arr[arr.length] = val;
+                return arr;
+            }
+            console.log(push2([1, 2], 3));
+
+            function pop2(arr) {
+                let newArr = [];
+                arr.forEach((item, index) => {
+                    if (index < arr.length - 1) {
+                        newArr.push(item);
+                    }
+                });
+                return newArr;
+            }
+            console.log(pop2([1, 2, 3, 4, 5, 6, 7]));
+
+            function unshift2(arr, value) {
+                let arr2 = [];
+                arr2.push(value);
+                let newArr = arr2.concat(arr);
+                return newArr;
+            }
+            console.log(unshift2([1, 2, 3, 4], 22));
+
+            function shift2(arr) {
+                let newArr = [];
+                arr.forEach((item, index) => {
+                    if (index > 0) {
+                        newArr.push(item);
+                    }
+                });
+                return newArr;
+            }
+            console.log(shift2([1, 2, 3, 4, 5]));
+        </script>
+    </body>
 </html>
