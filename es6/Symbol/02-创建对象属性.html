@@ -19,7 +19,7 @@
             Object.defineProperty(c, mySymbol, { value: 'hello' });
             console.log(a, b, c);
 
-            // Symbol 值作为对象属性名时，不能用电运算符，点运算符后面是字符串
+            // Symbol 值作为对象属性名时，不能用点运算符，点运算符后面是字符串
             // 所以不会读取标识名所指代的那个值
             let d = {};
             d.mySymbol = 'world';

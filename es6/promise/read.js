@@ -2,7 +2,7 @@
 let fs = require('fs');
 // 调用方法读取文件
 fs.readFile('./静夜思.md', (err, data) => {
-    // 如滚失败，抛出错误
+    // 如果失败，抛出错误
     if (err) {
         throw err;
     }
