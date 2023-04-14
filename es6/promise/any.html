@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            /**
+             *
+             *  any()
+             *      该方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例返回
+             *      Promise.any()不会因为某个 Promise 变成 rejected 状态而结束，
+             *      必须等到所有参数 Promise 变成 rejected 状态才会结束
+             *
+             * */
+            let p1 = new Promise((resolve, reject) => {
+                resolve(100);
+            });
+            let p2 = new Promise((resolve, reject) => {
+                reject(-1);
+            });
+            let p3 = new Promise((resolve, reject) => {
+                reject(false);
+            });
+            Promise.any([p1, p2, p3]).then(result => {
+                console.log(result);
+            });
+            // Promise.any() 抛出的错误是一个 AggregateError 实例，
+            // 这个 AggregateError 实例对象的 errors 属性是一个数组，包含了所有成员的错误
+            Promise.any([p2, p3]).catch(results => {
+                console.log(results instanceof AggregateError);
+                console.log(results.errors);
+            });
+        </script>
+    </body>
+</html>

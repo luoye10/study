@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // Promise.resolve() 方法可以将现有对象转为 Promise 对象
+            // Promise.resolve() 方法的参数有四种情况
+
+            // 1、参数是一个 Promise 实例，不做任何修改，返回这个实例
+
+            // 2、参数是一个 thenable 对象(具有 then 方法的对象)
+            let obj = {
+                then: function (resolve, reject) {
+                    resolve('four');
+                }
+            };
+            Promise.resolve(obj).then(result => {
+                console.log(result);
+            });
+
+            // 3、参数不是具有 then() 方法的对象，或者不是对象
+            // 会返回一个新的 Promise 对象，状态为 resolved
+            Promise.resolve('five').then(value => {
+                console.log(value);
+            });
+
+            // 4、不带有任何参数
+            // 直接返回一个 resolved 状态的 Promise 对象
+            setTimeout(() => {
+                console.log('three');
+            }, 0);
+            Promise.resolve().then(() => {
+                console.log('two');
+            });
+            console.log('one');
+        </script>
+    </body>
+</html>

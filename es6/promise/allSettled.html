@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            /**
+             *
+             *  allSettled()
+             *      该方法接受一个数组作为参数，
+             *      数组的每个成员都是 Promise 对象，
+             *      并返回一个新的 Promise 对象，
+             *      只有等到所有 Promise 对象的状态都发生变更，
+             *      返回的 Promise 对象的状态才会发生变更
+             *
+             * */
+            let p1 = new Promise((resolve, reject) => {
+                resolve(10);
+            });
+            let p2 = new Promise((resolve, reject) => {
+                reject(-1);
+            });
+            Promise.allSettled([p1, p2]).then(results => {
+                console.log(results);
+            });
+        </script>
+    </body>
+</html>

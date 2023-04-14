@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // Promise.reject() 方法返回一个新的 Promise 实例，该实例状态为 rejected
+            new Promise((resolve, reject) => {
+                reject('报错');
+            }).then(null, value => {
+                console.log(value);
+            });
+
+            // Promise.reject() 方法的参数，会作为 reject 的理由，变成后续方法的参数
+            Promise.reject('出错了').catch(error => {
+                console.log(error);
+                console.log(error === '出错了');
+            });
+        </script>
+    </body>
+</html>

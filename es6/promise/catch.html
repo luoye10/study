@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // catch() 方法用于指定发生错误时的回调函数
+            // catch() 方法返回的是一个 Promise 对象，因此后面还可以接着调用 then() 方法
+            // catch() 方法中还能再抛出错误
+            let p = new Promise((resolve, reject) => {
+                reject(new Error('error'));
+            });
+            p.catch(error => {
+                console.log(error);
+            }).then(() => {
+                console.log('success');
+            });
+            let fun = function () {
+                return new Promise((resolve, reject) => {
+                    // x 没有声明，下面一行会报错
+                    resolve(x + 1);
+                });
+            };
+            fun()
+                .then(() => {
+                    console.log('hi!');
+                })
+                .catch(error => {
+                    console.log('oh no ' + error);
+                    // y 没有声明，下面一行会报错
+                    y + 2;
+                })
+                .catch(error => {
+                    console.log('carry on ' + error);
+                });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            img {
+                width: 200px;
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="" />
+        <script>
+            setTimeout(f, 101);
+
+            function timeout(time) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(resolve, time, 'done');
+                });
+            }
+            timeout(100).then(value => {
+                console.log(value);
+            });
+
+            let promise = new Promise((resolve, reject) => {
+                console.log('promise');
+                resolve();
+            });
+            promise.then(() => {
+                console.log('resolved');
+            });
+            console.log('hello');
+            function f() {
+                console.log('hi!');
+            }
+
+            function loadImg(url) {
+                return new Promise((resolve, reject) => {
+                    let img = document.getElementsByTagName('img')[0];
+                    img.onload = function () {
+                        resolve(img);
+                    };
+                    img.onerror = function () {
+                        reject(new Error('Could not load image at ' + url));
+                    };
+
+                    img.src = url;
+                });
+            }
+            loadImg('../1.jpg');
+
+            let p1 = new Promise((resolve, reject) => {
+                setTimeout(() => reject(new Error('fail')), 3000);
+            });
+            let p2 = new Promise((resolve, reject) => {
+                setTimeout(() => resolve(p1), 1000);
+            });
+            p2.then(result => {
+                console.log(result);
+            }).catch(error => {
+                console.log(error);
+            });
+
+            new Promise((resolve, reject) => {
+                return resolve(1);
+                // 后面的语句不会执行
+                console.log(2);
+            }).then(n => {
+                console.log(n);
+            });
+
+            // 如果没有使用 catch() 方法指定错误处理的回调函数，Promose 对象抛出的错误不会影响 Peomise 外层的代码
+            new Promise((resolve, reject) => {
+                resolve(x + 2);
+            }).then(() => {
+                console.log('this is');
+            });
+            setTimeout(() => {
+                console.log(111);
+            }, 1000);
+        </script>
+    </body>
+</html>
