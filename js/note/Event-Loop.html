@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            /**
+             *
+             *  宏任务
+             *      script setTimeout setInterval setImmediate(Node.js环境)
+             *  微任务
+             *      Promise.then  process.nextTick(Node.js 环境)
+             *
+             *  JS是单线程，但是分同步和异步，微任务和宏任务都是异步任务，属于一个队列
+             *
+             *  执行顺序
+             *      先执行同步任务
+             *      遇到异步宏任务将异步宏任务放到宏任务队列中
+             *      遇到异步微任务将异步微任务放到微任务队列中
+             *      当所有同步任务执行完，再将异步微任务从队列中调入主线程执行
+             *      异步微任务执行完，再将异步宏任务从队列中调入主线程执行
+             *      一直循环直至所有任务执行完毕
+             *
+             */
+            setTimeout(() => {
+                console.log(1);
+            });
+            new Promise(resolve => {
+                console.log(2);
+                resolve();
+            })
+                .then(() => {
+                    console.log(3);
+                })
+                .then(() => {
+                    console.log(4);
+                });
+            console.log(5);
+        </script>
+    </body>
+</html>
