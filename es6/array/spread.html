@@ -19,6 +19,14 @@
             }
             fun(...tfBoys);
 
+            // 将扩展运算符用于数组赋值，必须要放到参数最后
+            function fn(a, b, ...args) {
+                log(a);
+                log(b);
+                log(args);
+            }
+            fn(1, 2, 3, 4, 5, 6);
+
             // 数组的合并
             let kzXD = ['肖央', '王太利'],
                 fhCQ = ['曾毅', '玲花'];
@@ -30,11 +38,29 @@
             let newArr = [...arr];
             log(newArr);
 
-            // 将伪数组转为真数组
+            // 将字符串转化为数组
+            log([...'hello']);
+
+            // 正确识别字符串的长度
+            log('x\uD83D\uDE80y'.length);
+            log([...'x\uD83D\uDE80y'].length);
+            log([...'hello'].length);
+
+            // 求数组最大元素
+            log(Math.max(...[20, 17, 31, 26, 10]));
+
+            // 将定义了遍历器接口的对象转为真数组
             let divs = document.querySelectorAll('div');
             let divArr = [...divs];
             log(divs);
             log(divArr);
+
+            let map = new Map([
+                [1, 'one'],
+                [2, 'two'],
+                [3, 'three']
+            ]);
+            log([...map]);
         </script>
     </body>
 </html>

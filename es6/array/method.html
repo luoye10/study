@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <script>
+            /**
+             *
+             *  Array.from()
+             *      将类数组对象和可遍历的对戏那个转化为真正的数组
+             *
+             *      类数组对象
+             *          本质特征只有一点，必须拥有 length 属性
+             *
+             */
+            let arrLike = {
+                0: 'hello',
+                1: true,
+                2: 100,
+                length: 3
+            };
+            console.log(arrLike);
+            console.log(Array.from(arrLike));
+
+            // DOM 操作返回的 NodeList 集合转化为数组
+            let divs = document.querySelectorAll('div');
+            console.log(divs);
+            console.log(Array.from(divs));
+
+            // 函数内部的 arguments 对象转化为数组
+            function foo() {
+                let args = Array.from(arguments);
+                console.log(arguments);
+                console.log(args);
+            }
+            foo(1, 2, 3, 4);
+
+            // 部署了 Iterator 接口的数据结构转化为数组
+            let str = 'hello';
+            let set = new Set(['a', 'b', 'c']);
+            console.log(Array.from(str));
+            console.log(set);
+            console.log(Array.from(set));
+
+            // 可以接受一个函数作为第二个参数，作用类似于数组的 map() 方法
+            //  对每个元素进行处理，处理后的值放入返回后的数组
+            let arr = [1, 2, 3, 4];
+            console.log(Array.from(arr, n => n * n));
+
+            function test() {
+                return Array.from(arguments, val => typeof val);
+            }
+            console.log(test(null, undefined, [], {}, function fn() {}, NaN, 10, 'hello', true));
+
+            /**
+             *
+             *  Array.of()
+             *      将一组值，转化为数组
+             *      返回由参数值组成的数组，没有参数就返回一个空数组
+             *
+             */
+            console.log(Array.of());
+            console.log(Array.of(3));
+            console.log(Array.of(1, 2, 3));
+
+            /**
+             *
+             *  copyWithin()
+             *      在当前数组内部，将指定位置的成员赋值到其他位置，然后返回当前数组
+             *      会修改当前数组
+             *
+             *  接受三个参数
+             *      target(必需)    从该位置开始替换，如果为负值，表示倒数
+             *      start(可选)     从该位置开始读取，默认为0，如果为负值，表示从末尾开始计算
+             *      end(可选)       到该位置前停止读取，默认等于数组长度，如果为负值，表示从末尾开始计算
+             *
+             *  三个参数都应该是数值，如果不是，会自动转换为数值
+             *
+             */
+            console.log([1, 2, 3, 4, 5].copyWithin(0, 3, 4));
+            console.log([1, 2, 3, 4, 5].copyWithin(0, -3, -1));
+        </script>
+    </body>
+</html>
