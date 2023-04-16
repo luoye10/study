@@ -57,6 +57,19 @@
             ];
             console.log(objArr.findLast(n => n.age > 30));
             console.log(objArr.findLastIndex(n => n.age > 30));
+
+            // includes() 返回一个布尔值，表示数组是否包含指定的值
+            // 第二个参数表示搜索的起始位置，默认为 0
+            // 如果是负数，则表示倒数的位置
+            // 如果绝对值大于或等于数组的长度，则从0开始
+            // 只会搜索第二个参数表示的位置，不会向后继续搜索
+            let numArr = [11, 22, 33, 44];
+            let result = numArr.includes(22);
+            let res = numArr.includes(22, 2);
+            let ret = numArr.includes(22, -1);
+            let rel = numArr.includes(22, 4);
+            console.log(numArr);
+            console.log(result, res, ret, rel);
         </script>
     </body>
 </html>

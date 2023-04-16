@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            /**
+             *
+             *  entries()
+             *      对键值对的遍历
+             *  keys()
+             *      对键名的遍历
+             *  values()
+             *      对键值的遍历
+             *
+             *  都返回一个遍历器对象，可以用 for...of 循环进行遍历
+             *
+             */
+            let arr = ['hello', 'world'];
+            for (let key of arr.keys()) {
+                console.log(key);
+            }
+            for (let value of arr.values()) {
+                console.log(value);
+            }
+            for (let [key, value] of arr.entries()) {
+                console.log([key, value]);
+            }
+            console.log(arr.entries().next().value);
+            console.log(arr);
+
+            // fill() 使用给定值，填充数组
+            // 可以接受第二个和第三个参数，用于指定填充的起始位置和结束位置
+            // 会改变原数组，返回值就是新的数组
+            let strArr = ['name', 'word', 'time'];
+            let result = strArr.fill(1, 2);
+            console.log(strArr, result);
+
+            // 如果填充的类型为对象，被赋值的是同一个内存地址的对象
+            let objArr = new Array(3).fill({ name: 'lily' });
+            console.log(objArr);
+            objArr[0].name = 'tom';
+            console.log(objArr);
+
+            /**
+             *
+             *  flat()
+             *      按照一个可以指定的深度递归遍历数组，
+             *      将所有元素和遍历到的子数组中的元素合并为一个新数组返回
+             *
+             *      参数
+             *          depth(可选)
+             *              指定要提取嵌套数组的结构深度，默认为 1
+             *
+             *      返回值
+             *          一个包含数组与子数组中所有元素的新数组
+             *
+             *      不会改变原数组
+             *
+             */
+            // infinity 可以展开任意深度的嵌套数组
+            let nums = [11, 12, 22, [31, 33, [52, 55], 64], 78];
+            newNums = nums.flat(Infinity);
+            console.log(nums, newNums);
+
+            // flat() 会移除数组中的空项
+            let num = [1, 2, , 3, 4, , 5];
+            newNum = num.flat();
+            console.log(num, newNum);
+        </script>
+    </body>
+</html>

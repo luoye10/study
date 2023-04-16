@@ -107,30 +107,6 @@
             }
             let arrs = [1, 2, 3, [4, 5, [6, 7], 8]];
             console.log(show(arrs));
-
-            /**
-             *
-             *  flat()
-             *      按照一个可以指定的深度递归遍历数组，
-             *      将所有元素和遍历到的子数组中的元素合并为一个新数组返回
-             *
-             *      参数
-             *          depth(可选)
-             *              指定要提取嵌套数组的结构深度，默认为 1
-             *
-             *      返回值
-             *          一个包含数组与子数组中所有元素的新数组
-             *
-             */
-            // infinity 可以展开任意深度的嵌套数组
-            let nums = [11, 12, 22, [31, 33, [52, 55], 64], 78];
-            newNums = nums.flat(Infinity);
-            console.log(newNums);
-
-            // flat() 会移除数组中的空项
-            let num = [1, 2, , 3, 4, , 5];
-            newNum = num.flat();
-            console.log(num, newNum);
         </script>
     </body>
 </html>
