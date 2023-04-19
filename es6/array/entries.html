@@ -71,6 +71,26 @@
             let num = [1, 2, , 3, 4, , 5];
             newNum = num.flat();
             console.log(num, newNum);
+
+            /**
+             *
+             *  flatMap()
+             *      对原数组的每一个成员执行一个函数(相当于执行 Array.prototype.map())
+             *      对返回值组成的数组执行 flat()方法
+             *
+             *      参数是一个遍历函数，该函数可以接受三个参数
+             *          item    当前数组的成员
+             *          index   当前数组成员的位置
+             *          arr     原数组
+             *
+             *      返回一个新数组，不改变原数组
+             *
+             */
+            console.log([2, 3, 4].flatMap(x => x * 2));
+            let numArr = [10, 20, 30, 40];
+            numArr.flatMap((item, index, arr) => {
+                console.log(item, index, arr);
+            });
         </script>
     </body>
 </html>

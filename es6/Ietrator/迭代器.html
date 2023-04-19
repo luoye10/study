@@ -41,6 +41,26 @@
             console.log(iterator.next());
             console.log(iterator.next());
             console.log(iterator.next());
+
+            /**
+             *
+             *  for...in
+             *      迭代一个对象除 Symbol 以外的可枚举的属性，包括继承的可枚举属性
+             *
+             *  for (variable in object)
+             *      variable    每次迭代时，会被赋值为不同的属性名
+             *      object      非 Symbol 类型的被迭代的对象
+             *
+             */
+            let obj = {
+                name: 'lucy',
+                age: 20,
+                gender: 'girl'
+            };
+            obj.__proto__.work = 'teacher';
+            for (let k in obj) {
+                console.log(obj[k]);
+            }
         </script>
     </body>
 </html>
