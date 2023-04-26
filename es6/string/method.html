@@ -102,7 +102,9 @@
             console.log('abc'.replaceAll('b', () => '='));
 
             // at() 接受一个整数作为参数，返回参数指定位置的字符，可以是负数(倒数的位置)
+            // 如果参数位置超出了字符串范围，返回 undefined
             console.log('hello'.at(1), 'hello'.at(-1));
+            console.log('hello'.at(5));
         </script>
     </body>
 </html>

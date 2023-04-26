@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            /**
+             *
+             *  二进制数值的新写法，用前缀 0b(或 0B)表示
+             *  八进制数值的新写法，用前缀 0o(或 0O)表示
+             *  十六进制数值的写法，用前缀 0x(或 0X)表示
+             *
+             *  如果要将 0b 和 0o 前缀的字符串数值转为十进制，要是用 Number 方法
+             *
+             */
+            console.log(0b0101 === 5, 0o1234 === 668, 0x12 === 18);
+            console.log(Number('0b0101'));
+            console.log(Number('0o1234'));
+            console.log(Number('0x12'));
+
+            /**
+             *
+             *  数值分隔符 _
+             *      不能放在数值的最前面和最后面
+             *      不能两个或两个以上的分隔符连在一起
+             *      小数点的前后不能有分隔符
+             *      科学计数法里表示指数的 e 前后不能有分隔符
+             *      分隔符不能紧跟着进制的前缀
+             *
+             */
+            let num = 1_000_000;
+            console.log(num === 10 ** 6);
+
+            /**
+             *
+             *  Number.isFinite()
+             *      检查一个数值是否为有限的，即不是 Infinity
+             *      是就返回 true，不是返回 false
+             *      如果参数类型不是数值，一律返回 false
+             *
+             *  Number.isNaN()
+             *      检查一个值是否为 NaN
+             *      是返回 true，不是返回 false
+             *
+             */
+            console.log(Number.isFinite(11), Number.isFinite(Infinity), Number.isFinite(true));
+            console.log(Number.isNaN(NaN), Number.isNaN('NaN'), Number.isNaN(1));
+
+            /**
+             *
+             *  parseInt(string,radix)
+             *      根据指定基数，解析字符串并返回一个整数
+             *
+             *      参数
+             *          string
+             *              要被解析的值，如果不是字符串，会被强制转化为字符串
+             *
+             *          radix(可选)
+             *              从 2 到 36 的整数，表示进制的基数，超出这个范围，返回 NaN
+             *              如果未指定或者为 0，除非数字以 0x(或0X)开头，否则假定为十进制
+             *
+             *      返回值
+             *          从给定的字符串中解析出的一个整数
+             *          如果基数小于 2 或大于 36，或第一个非空白字符不能转换为数字，则返回 NaN
+             *
+             */
+            console.log(parseInt('123', 5));
+
+            /**
+             *
+             *  parseFloat(string)
+             *      解析一个参数并返回一个浮点数
+             *
+             *      参数
+             *          string  要被解析称为浮点数的值
+             *
+             *      返回值
+             *          给定值被解析成浮点数，如果给定值不能被转换成数值，则返回 NaN
+             *
+             *      如果在解析过程中遇到了正号(+)，负号(-)，数字(0-9)，小数点(.)，
+             *        或者科学计数法(e)以外的字符，会忽略该字符之后的所有字符，返回当前已经解析到的浮点数
+             *      第二个小数点的出现也会使解析停止
+             *      参数首位和末位的空白符也会忽略
+             *      参数字符串的第一个字符不能被解析成数字，则返回 NaN
+             *      可以解析并返回 Infinity
+             *      解析 BigInt 为 Numbers, 丢失精度
+             *      可以转换一个定义了 toString 或者 valueOf 方法的对象，
+             *        返回的值和在调用该方法的结果上调用 parseFloat 值相同
+             *
+             */
+            console.log(parseFloat('3.31233'));
+            console.log(parseFloat('331e'));
+            console.log(parseFloat('hsgfj'));
+            console.log(parseFloat('12.13hdjgsdj'));
+            console.log(
+                parseFloat({
+                    toString: function () {
+                        return 21.23e12;
+                    }
+                })
+            );
+            // 当整数太大以至于不能被转换时将逝去精度
+            console.log(parseFloat(123456789101112131415));
+        </script>
+    </body>
+</html>

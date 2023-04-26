@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>map和forEach</title>
+    </head>
+    <body>
+        <script>
+            /**
+             *
+             *  map()
+             *      创建一个新数组，由原数组的每个元素都调用一次提供的函数的返回值组成
+             *
+             *      参数
+             *          callback
+             *              生成新数组的函数，有三个参数
+             *                  currentValue 数组中正在处理的当前元素
+             *                  index  数组中正在处理的当前元素的索引
+             *                  array  map方法调用的数组
+             *          thisArg(可选)
+             *              执行callback函数时被用作this的值
+             *
+             *      返回值
+             *          一个新数组，每个元素都是回调函数的返回值
+             *
+             *  forEach()
+             *      对数组的每个元素执行一次给定的函数
+             *
+             *      参数
+             *          callback
+             *              为数组中每个元素执行的函数，有三个参数
+             *                  element 数组中正在处理的当前元素
+             *                  index   数组中正在处理的当前元素的索引
+             *                  array   forEach正在执行操作的数组
+             *          thisArg(可选)
+             *              执行callback函数时被用作this的值
+             *
+             *      返回值
+             *          undefined
+             *
+             */
+            let arr1 = [1, 2, 3, 4];
+            result = arr1.map(n => n * n);
+            arr1.forEach(item => {
+                console.log(item * item);
+            });
+            console.log(result);
+
+            let arr2 = [
+                {
+                    key: 1,
+                    value: 10
+                },
+                {
+                    key: 2,
+                    value: 20
+                },
+                {
+                    key: 3,
+                    value: 30
+                }
+            ];
+            arr2.forEach(item => {
+                console.log(item);
+            });
+            res = arr2.map(({ key, value }) => {
+                return { [key]: value };
+            });
+            console.log(res);
+
+            let arr3 = [1, 2, 3, 4, 5];
+            arr3.forEach((item, index) => {
+                if (index < 3) {
+                    console.log(item);
+                }
+            });
+            rst = arr3.map((item, index) => {
+                if (index < 3) {
+                    return item;
+                }
+            });
+            console.log(rst);
+
+            // 在迭代期间修改数组
+            let words = ['one', 'two', 'three', 'four'];
+            words.forEach((item, index) => {
+                console.log(item);
+                if (index > 2) {
+                    words.shift();
+                }
+            });
+            console.log(words);
+
+            // 扁平化数组
+            function show(arr) {
+                let newArr = [];
+                arr.forEach(item => {
+                    if (Array.isArray(item)) {
+                        newArr.push(...show(item));
+                    } else {
+                        newArr.push(item);
+                    }
+                });
+                return newArr;
+            }
+            let arrs = [1, 2, 3, [4, 5, [6, 7], 8]];
+            console.log(show(arrs));
+
+            /**
+             *
+             *  every(callbackFn, thisArg)
+             *      测试一个数组内的所有元素是否都能通过指定函数的测试，返回一个布尔值
+             *
+             *      参数
+             *          callbackFn
+             *              为数组中的每个元素执行的函数，
+             *              返回一个真值以指示元素通过测试，
+             *              否则返回一个假值
+             *              参数
+             *                  element 数组中当前正在处理的元素
+             *                  index   正在处理的元素在数组中的索引
+             *                  array   调用了 every() 的数组本身
+             *          thisArg(可选)
+             *              执行 callbackFn 时用作 this 的值
+             *      返回值
+             *          如果 callbackFn 为每个数组元素返回真值，则返回 true，否则返回 false
+             *
+             *      every() 时一个迭代方法，为数组中的每一个元素调用一次指定的 callbackFn 函数，
+             *      直到 callbackFn 返回一个假值，如果找到这样的元素，立即返回 false 并停止遍历数组
+             *      如果 callbackFn 为每一个元素返回真值，则返回 true
+             *
+             *      对于空数组，只返回 true
+             *      callbackFn 只针对以分配值的数组索引调用，不会为稀疏数组中的空槽调用
+             *
+             *      every() 不会改变调用它的数组，但指定的 callbackFn 函数可以
+             *      数组的长度是在第一个调用 callbackFn 之前保存的
+             *          1、调用 every() 时，callbackFn 不会访问超出数组初始长度的任何元素
+             *          2、对已访问索引的更改不会导致再次在这些元素上调用 callbackFn
+             *          3、如果数组中一个现有的，尚未访问的元素被 callbackFn 更改，
+             *              则它传递给 callbackFn 的值将是该元素被修改后的值
+             *              被删除的元素不会被访问
+             *
+             *      every() 方法是通用的，只期望 this 值具有 length 属性和整数键属性
+             *
+             */
+            // 检查所有数组元素的大小
+            function isBigEnough(element) {
+                return element >= 10;
+            }
+            console.log([12, 45, 2, 100].every(isBigEnough));
+            console.log([12, 45, 23, 100].every(isBigEnough));
+
+            // 检查一个数组是否是另一个数组的子集
+            function isSubset(arr1, arr2) {
+                return arr2.every(element => arr1.includes(element));
+            }
+            console.log(isSubset([1, 2, 3, 4, 5, 6], [1, 2, 3]));
+            console.log(isSubset([1, 2, 3, 4, 5, 6], [1, 9, 3]));
+
+            // 在稀疏数组上使用 every()
+            console.log([1, , 2].every(e => e !== undefined));
+            console.log([2, , 2].every(e => e === 2));
+
+            // 影响初始数组
+            // 修改元素
+            let num = [1, 2, 3, 4];
+            num.every((element, index, arr) => {
+                arr[index + 1]--;
+                console.log(`[${arr}][${index}] -> ${element}`);
+                return element < 2;
+            });
+            // 添加元素
+            let nums = [1, 2, 3];
+            nums.every((e, i, arr) => {
+                arr.push('new');
+                console.log(`[${arr}][${i}] -> ${e}`);
+                return e < 4;
+            });
+            // 删除元素
+            let numArr = [1, 2, 3, 4];
+            numArr.every((e, i, arr) => {
+                arr.pop();
+                console.log(`[${arr}][${i}] -> ${e}`);
+                return e < 4;
+            });
+
+            // 在非数组对象上调用 every()
+            // every() 读取 this 的 length 属性，然后访问每个整数索引，直到到达末尾或 callbackFn 返回 false
+            let list = {
+                length: 3,
+                0: 'a',
+                1: 'b',
+                2: 'c'
+            };
+            console.log(Array.prototype.every.call(list, x => typeof x === 'string'));
+        </script>
+    </body>
+</html>
