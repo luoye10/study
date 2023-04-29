@@ -8,34 +8,100 @@
     </head>
     <body>
         <script>
-            let obj = {
-                name: 'tom',
-                age: 22,
-                love: function () {
-                    console.log(`${this.name} is a great boy!`);
-                }
-            };
-            let newObj = Object.assign({}, obj);
-            newObj.love();
-
             /**
              *
-             *   Object.hasOwn()
+             *  Object.assign(target, sources)
+             *      用于对象的合并，将原对象的所有可枚举属性，复制到目标对象
+             *
              *      参数
-             *          instance 要测试的 js 实例对象
-             *          prop     要测试属性的 String 类型的名称
+             *          target
+             *              目标对象，接收源对象属性的对象，修改后的返回值
+             *          sources
+             *              源对象，包含将被合并的属性
+             *
              *      返回值
-             *          如果指定的对象中定义了指定的属性，返回 true
-             *          如果属性时继承的或者不存在，返回 false
+             *          目标对象
+             *
+             *      如果目标对象与源对象有相同的 key，目标对象中的属性被源对象中的属性覆盖
+             *      后面的源对象中的属性将类似地覆盖前面的源对象中的属性
+             *
+             *      只会拷贝源对象可枚举的和自身的属性到目标对象
+             *      使用源对象的 [get] 和目标对象的 [set]
+             *
+             *      如果赋值期间出错，例如属性不可写，会抛出 TypeError
+             *      如果在抛出异常之前添加了属性，会修改 target 对象
+             *
+             *      不会在 source 对象值为 null 和 undefined 时抛出错误
              *
              */
-            let list = {
-                name: 'lily',
-                age: 20
+            // 复制对象
+            let obj = {
+                name: 'david',
+                age: 30
             };
-            list.__proto__.gender = '男';
-            let result = Object.hasOwn(list, 'gender');
-            console.log(result);
+            let newObj = Object.assign({}, obj);
+            console.log(newObj);
+
+            // 合并对象
+            let o1 = { a: 10 },
+                o2 = { b: 20 },
+                o3 = { c: 30 };
+            let o = Object.assign(o1, o2, o3);
+            console.log(o);
+
+            // 合并具有相同属性的对象
+            let v1 = { a: 10, b: 20, c: 30 },
+                v2 = { b: 200, c: 300 },
+                v3 = { c: 3000 };
+            let v = Object.assign(v1, v2, v3);
+            console.log(v);
+
+            // 原型链上的属性和不可枚举属性不能被复制
+            let list = Object.create(
+                { value: 1 },
+                {
+                    bar: {
+                        value: 10
+                    },
+                    foo: {
+                        value: 20,
+                        enumerable: true
+                    }
+                }
+            );
+            let l = Object.assign({}, list);
+            console.log(l);
+
+            // 基本类型会被包装为对象
+            // 字符串会以数组形式拷贝如目标对象，其他的都不会产生效果
+            // 属性名为 Symbol 值的属性，会被拷贝
+            let item = Object.assign({}, 'abc', true, null, 10, undefined, { [Symbol('h')]: 'hello' });
+            console.log(item);
+
+            // 注意点
+            // 1、Object.assign() 实现的是浅拷贝
+            let obj1 = { a: { b: 1 } };
+            let obj2 = Object.assign({}, obj1);
+            obj1.a.b = 10;
+            console.log(obj1, obj2);
+            // 2、同名属性的替换
+            // 对于嵌套的对象，遇到同名属性，会进行替换，不是添加
+            let target = { a: { b: 10, c: 'hello' } };
+            let source = { a: { b: true } };
+            console.log(Object.assign(target, source));
+            // 3、数组的处理
+            // 会把数组视为对象来进行处理
+            let arr = Object.assign([1, 2, 3], ['hello', true, 10]);
+            console.log(arr);
+            // 4、取值函数的处理
+            // 要复制的值是一个取值函数，将求值后再进行复制
+            let tar = {
+                get value() {
+                    return 10;
+                }
+            };
+            let res = Object.assign({}, tar);
+            console.log(res);
         </script>
     </body>
 </html>

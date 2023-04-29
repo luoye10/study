@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>对象的方法</title>
+    </head>
+    <body>
+        <script>
+            /**
+             *
+             *  Object.is()
+             *      比较两个值是否严格相等
+             *
+             *      +0 不等于 -0
+             *      NaN 等于自身
+             *
+             */
+            console.log(Object.is(NaN, NaN), Object.is({}, {}), Object.is(+0, -0), Object.is('h', 'h'));
+
+            // Object.getOwnPropertyDescriptors()
+            // 返回一个对象，所有原对象的属性名就是该对象的属性名，对应的属性值就是该属性的描述对象
+            let obj = {
+                value: 10,
+                get foo() {
+                    return 'hello';
+                }
+            };
+            let res = Object.getOwnPropertyDescriptors(obj);
+            console.log(res);
+            // 配合 Object.create() 方法，将对象属性克隆到一个新对象
+            let obj1 = {
+                value: 100,
+                foo: 'hello'
+            };
+            let obj2 = Object.create(Object.getPrototypeOf(obj1), Object.getOwnPropertyDescriptors(obj1));
+            console.log(obj2);
+            // 可以实现一个对象继承另一个对象
+            let obj3 = Object.create({}, Object.getOwnPropertyDescriptors({ length: 2 }));
+            console.log(obj3);
+
+            // Object.setPrototypeOf(object,prototype)
+            // 设置一个对象的原型对象，返回参数对象本身
+            let proto = {
+                a: 10,
+                b: 20,
+                c: 30
+            };
+            let o = { x: 1 };
+            Object.setPrototypeOf(o, proto);
+            console.log(o.a, o.b);
+
+            // Object.getPrototypeOf(obj)
+            // 读取一个对象的原型对象
+            function Fun() {}
+            let f = new Fun();
+            let rst = Object.getPrototypeOf(f) === Fun.prototype;
+            console.log(rst);
+
+            /**
+             *
+             *  Object.keys()
+             *      返回一个数组，成员是参数对象自身的所有可遍历属性的键名
+             *  Object.values()
+             *      返回一个数组，成员是参数对象自身的所有可遍历属性的键值
+             *      会过滤属性名为 Symbol 值的属性
+             *      如果参数是一个字符串，会返回字符组成的一个数组
+             *      如果参数不是对象，会先转换为对象
+             *      数值和布尔值的包装对象，都不会为实例添加非继承的属性，所以会返回空数组
+             *  Object.entries()
+             *      返回一个数组，成员是参数对象自身的所有可遍历属性的键值对数组
+             *      如果属性名是一个 Symbol 值，该属性会被忽略
+             *
+             *
+             */
+            let item = {
+                name: 'lili',
+                age: 22,
+                [Symbol()]: true
+            };
+            let keyArr = Object.keys(item);
+            console.log(keyArr);
+            let valArr = Object.values(item);
+            console.log(valArr);
+            let strArr = Object.values('hello');
+            console.log(strArr);
+            console.log(Object.values(100), Object.values(true));
+            console.log(Object.entries(item));
+
+            // Object.fromEntries()
+            // 将一个键值对数组转化为对象
+            let ret = Object.fromEntries([
+                ['value', 10],
+                ['foo', 'hello']
+            ]);
+            console.log(ret);
+
+            /**
+             *
+             *   Object.hasOwn()
+             *      参数
+             *          instance 要测试的 js 实例对象
+             *          prop     要测试属性的 String 类型的名称
+             *      返回值
+             *          如果指定的对象中定义了指定的属性，返回 true
+             *          如果属性是继承的或者不存在，返回 false
+             *
+             */
+            let list = {
+                name: 'lily',
+                age: 20
+            };
+            list.__proto__.gender = '男';
+            let result = Object.hasOwn(list, 'gender');
+            console.log(result);
+        </script>
+    </body>
+</html>
