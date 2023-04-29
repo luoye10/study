@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // ES6 允许给函数参数赋值初始值
+            // 1. 形参的初始值(具有默认值的参数，一般位置要靠后)
+            function add(a, b, c = 10) {
+                return a + b + c;
+            }
+            console.log(add(1, 2));
+
+            // 2. 可以与解构赋值相结合使用
+            function connect({ host = 'atGuiGu.com', username, password }) {
+                console.log(host);
+                console.log(username);
+                console.log(password);
+            }
+            connect({
+                username: 'root',
+                password: '123'
+            });
+
+            // ES6 引入 rest参数，用于获取函数的实参，用来代替 arguments
+            // ES5 获取实参的方式
+            function data() {
+                console.log(arguments);
+            }
+            data('李白', '杜甫', '王勃');
+
+            // rest 参数
+            function dt(...args) {
+                console.log(args);
+            }
+            dt('李白', '杜甫', '王勃');
+
+            // rest 参数必须要放到参数最后
+            function fun(a, b, ...args) {
+                console.log(a);
+                console.log(b);
+                console.log(args);
+            }
+            fun(1, 2, 3, 4, 5, 6);
+
+            // name属性
+            // 函数的 name 属性返回该函数的函数名
+            function foo() {}
+            let f = function () {};
+            let bar = function baz() {};
+            console.log(foo.name, f.name, bar.name);
+
+            // Function 构造函数返回的函数实例，name 属性的值为 anonymous
+            console.log(new Function().name);
+
+            // bind 返回的函数，name 属性值会加上 bound 前缀
+            function fn() {}
+            console.log(fn.bind({}).name);
+
+            // toString() 返回一模一样的原始代码
+            function /* fun is a function */ fun() {}
+            console.log(fun.toString());
+        </script>
+    </body>
+</html>
