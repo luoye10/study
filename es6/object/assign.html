@@ -11,8 +11,8 @@
             let obj = {
                 name: 'tom',
                 age: 22,
-                love: () => {
-                    console.log(`${name} is a great boy!`);
+                love: function () {
+                    console.log(`${this.name} is a great boy!`);
                 }
             };
             let newObj = Object.assign({}, obj);
