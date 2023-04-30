@@ -29,12 +29,13 @@
                 age: 22
             };
             console.log(Object.getOwnPropertyDescriptor(obj, 'name'));
+            console.log(Object.getOwnPropertyDescriptor(obj, 'age'));
 
             /**
              *
              *  属性遍历
-             *      for..in
-             *          循环遍历自身和继承的可枚举属性(不含 Symbol 属性)
+             *      for..in循环
+             *          遍历自身和继承的可枚举属性(不含 Symbol 属性)
              *      Object.keys(obj)
              *          返回一个数组，包含对象自身所有的可枚举属性(不含 Symbol 属性)的键名
              *      Object.getOwnPropertyNames(obj)
@@ -51,7 +52,16 @@
              *
              *
              */
-            console.log(Reflect.ownKeys({ [Symbol()]: 1, b: 2, 2: 20, a: 12, 1: 10 }));
+            let prop = { [Symbol()]: 1, b: 2, 2: 20, a: 12, 1: 10 };
+            let arr = [];
+            for (let key in prop) {
+                arr.push(key);
+            }
+            console.log(arr);
+            console.log(Object.keys(prop));
+            console.log(Object.getOwnPropertyNames(prop));
+            console.log(Object.getOwnPropertySymbols(prop));
+            console.log(Reflect.ownKeys(prop));
 
             // super 关键字，指向当前对象的原型对象
             // super 关键字表示原型对象时，只能用在对象的方法中
@@ -99,7 +109,7 @@
             let person = { ...a, ...b, ...c };
             console.log(person);
 
-            // 如果用户自定义的属性放到扩展运算符后面，扩展运算符的同名属性会被覆盖
+            // 如果用户自定义的属性放到扩展运算符后面，扩展运算符内部的同名属性会被覆盖
             let s = {
                 m: 10,
                 n: 20
