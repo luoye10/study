@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // 指数运算符(**)
+            // 多个指数运算符连用时，从最右边开始计算
+            let a = 2 ** (3 ** 2);
+            console.log(a);
+            let b = 3;
+            b **= 3;
+            console.log(b);
+
+            /**
+             *
+             *  链判断运算符(?.)
+             *      obj?.prop
+             *          对象属性是否存在
+             *          如果存在返回属性值，不存在返回 undefined
+             *      obj?.[expr]
+             *          对象属性是否存在
+             *          如果存在返回属性值，不存在返回 undefined
+             *      func?.(...args)
+             *          函数或对象的方法是否存在
+             *
+             *
+             */
+            let obj = {
+                name: 'sisi',
+                age: 22,
+                gender: '女'
+            };
+            let res = obj?.name,
+                ret = obj?.['age'],
+                rsl = obj?.work,
+                rst = obj?.['word'];
+            let result = obj.toString?.();
+            console.log(res, ret, rsl, rst);
+            console.log(result);
+
+            // Null 判断运算符(??)
+            // 运算符左侧的值为 null 或 undefined 时，返回右侧的值
+            let v;
+            let value = obj?.v ?? 10;
+            console.log(value);
+            // 如果多个逻辑运算符一起使用，要用括号表明优先级，否则会报错
+
+            /**
+             *
+             *  逻辑赋值运算符
+             *      ||=     或赋值运算符
+             *      &&=     与赋值运算符
+             *      ??=     Null 赋值运算符
+             *
+             *
+             */
+            let user = {};
+            user.name ||= 'john';
+            user.password &&= '123456';
+            user.email ??= 'admin@name.com';
+            console.log(user, user.password);
+        </script>
+    </body>
+</html>
