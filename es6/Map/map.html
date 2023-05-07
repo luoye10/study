@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            /**
+             *
+             *  Map
+             *      类似于对象，也是键值对的集合，键可以是各种类型的值
+             *      可以接受一个数组作为参数
+             *
+             */
+            // set() 设置键名 key 对应的键值为 value，然后返回整个 Map 结构
+            // 如果 key 已经有值，键值会被更新，否则就新生成该键
+            let m = new Map();
+            let obj = {
+                name: 'lily',
+                age: 20
+            };
+            m.set(obj, true);
+            console.log(m);
+            // get() 方法读取 key对应的键值，如果找不到 key，就返回 undefined
+            let g = m.get(obj),
+                get = m.get('hello');
+            console.log(g, get);
+            // has() 方法返回一个布尔值，表示某个键是否在当前 Map 对象中
+            let res = m.has(obj),
+                ret = m.has('hello');
+            console.log(res, ret);
+            // delete() 方法删除某个键，删除成功返回true，删除失败返回 false
+            let y = m.delete(obj);
+            console.log(y);
+            // clear() 方法清除所有成员，没有返回值
+            // size 属性返回 Map 结构的所有成员总数
+            let size = m.size;
+            console.log(size);
+
+            /**
+             *
+             *  遍历
+             *      keys()
+             *          返回键名的遍历
+             *      values()
+             *          返回键值的遍历
+             *      entries()
+             *          返回所有成员的遍历
+             *      forEach()
+             *          遍历 Map 的所有成员
+             *
+             *
+             *
+             */
+            let map = new Map([
+                ['T', 'true'],
+                ['F', 'false']
+            ]);
+            for (let key of map.keys()) {
+                console.log(key);
+            }
+            for (let value of map.values()) {
+                console.log(value);
+            }
+            for (let item of map.entries()) {
+                console.log(item);
+            }
+            map.forEach((key, value, map) => {
+                console.log(key);
+                console.log(value);
+                console.log(map);
+            });
+        </script>
+    </body>
+</html>
