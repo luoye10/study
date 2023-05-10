@@ -87,6 +87,24 @@
              */
             console.log([1, 2, 3, 4, 5].copyWithin(0, 3, 4));
             console.log([1, 2, 3, 4, 5].copyWithin(0, -3, -1));
+
+            // reverse() 将数组元素反向排列
+            console.log([1, 2, 3].reverse());
+
+            // sort() 对数组进行排序
+            let num = [10, 4, 29, 13, 2];
+            console.log(num.sort((a, b) => a - b)); // 升序排列
+            console.log(num.sort((a, b) => b - a)); // 降序排列
+
+            // join() 接受一个字符串分隔符参数，返回包含所有项的字符串
+            let color = ['red', 'blue', 'green'];
+            let res = color.join('||');
+            console.log(res);
+
+            // filter() 对数组每一个元素都运行传入的函数，函数返回true的元素会组成数组返回
+            let nums = [1, 2, 3, 4, 5, 6, 7, 8];
+            let ret = nums.filter(item => item % 2 === 0);
+            console.log(ret);
         </script>
     </body>
 </html>
