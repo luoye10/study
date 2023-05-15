@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>async await</title>
+    </head>
+    <body>
+        <script>
+            /**
+             *
+             *  async
+             *      返回一个 Promise 对象，可以用 then 方法添加回调函数
+             *      当函数执行的时候，遇到 await 就会先返回，等到异步操作完成，再执行函数体后面的语句
+             *
+             *
+             */
+            async function getName(name) {
+                let obj = await set(100);
+                return name;
+            }
+            getName('tom').then(res => console.log(res));
+
+            function set(t) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve('success');
+                    }, t);
+                });
+            }
+            async function abc() {
+                const result = await set(2000);
+                console.log(result);
+                console.log('111');
+            }
+            abc();
+
+            async function timeout(time) {
+                await new Promise(resolve => {
+                    setTimeout(resolve, time);
+                });
+            }
+            async function carry(v, time) {
+                await timeout(time);
+                console.log(v);
+            }
+            carry('hello', 5000);
+
+            // 返回 Promise 对象
+            // async 函数内部 return 语句返回的值，会成为 then 方法回调函数的参数
+            async function f() {
+                return 'hello world';
+            }
+            f().then(v => console.log(v));
+
+            // await 命令
+            // 正常情况下，await 命令后面是一个 Promise 对象，返回该对象的结果
+            // 如果不是 Promise 对象，就直接返回对应的值
+            async function fn() {
+                // 等同于 return 123
+                return await 123;
+            }
+            fn().then(v => console.log(v));
+            // await 命令后面是一个 thenable 对象(定义了 then 方法的对象)，await会将其等同于Promise对象
+            class Sleep {
+                constructor(timeout) {
+                    this.timeout = timeout;
+                }
+                then(resolve, reject) {
+                    let startTime = Date.now();
+                    setTimeout(() => resolve(Date.now() - startTime), this.timeout);
+                }
+            }
+            async function sl() {
+                let sleepTime = await new Sleep(1000);
+                console.log(sleepTime);
+            }
+            sl();
+            // await 命令后面的 Promise 对象如果变为 reject 状态，reject 的参数会被 catch 方法的回调函数接收到
+            // 任何一个 await 语句后面的 Promise 对象变为 reject 状态，会中断整个 async 函数
+            async function fun() {
+                await Promise.reject('出错了');
+                await Promise.resolve('执行成功');
+            }
+            fun()
+                .then(v => console.log(v))
+                .catch(e => console.log(e));
+            // 如果希望前一个异步操作失败，不会中断后面的异步操作，可以将前一个异步操作放在 try...catch 里面
+            async function test() {
+                try {
+                    await Promise.reject('error');
+                } catch (e) {}
+                return await Promise.resolve('函数执行成功');
+            }
+            test().then(v => console.log(v));
+            // await 后面的 Promise 对象再跟一个 catch 方法，处理前面可能出现的错误
+            async function func() {
+                await Promise.reject('出错了').catch(e => console.log(e));
+                return await Promise.resolve('成功');
+            }
+            func().then(v => console.log(v));
+
+            // 错误处理
+            // 如果 await 后面的异步操作出错，等同于 async 函数后面的 Promise 对象被 reject
+            async function err() {
+                await new Promise((resolve, reject) => {
+                    throw new Error('出错了');
+                });
+            }
+            err()
+                .then(v => console.log(v))
+                .catch(e => console.log(e));
+            async function main() {
+                try {
+                    const val1 = await firstStep();
+                    const val2 = await secondStep(val1);
+                    const val3 = await thirdStep(val1, val2);
+
+                    console.log('Final: ', val3);
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+            main()
+                .then(v => console.log(v))
+                .catch(e => console.log(e));
+        </script>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            function sleep(interval) {
+                return new Promise(resolve => {
+                    setTimeout(resolve, interval);
+                });
+            }
+            async function fun() {
+                for (let i = 1; i <= 5; i++) {
+                    console.log(i);
+                    await sleep(2000);
+                }
+            }
+            fun();
+
+            function test(god) {
+                return new Promise(resolve => {
+                    console.log(`王老师向${god}表白`);
+                    setTimeout(() => {
+                        if (Math.random() < 0.3) {
+                            resolve(true);
+                        } else {
+                            resolve(false);
+                        }
+                    });
+                });
+            }
+            async function all() {
+                let gods = ['李雪', '王佳宁', '张慧仪'];
+                for (let i = 0; i < gods.length; i++) {
+                    let result = await test(gods[i]);
+                    if (result) {
+                        console.log(`${gods[i]}同意了`);
+                        break;
+                    } else {
+                        console.log(`${gods[i]}不同意`);
+                    }
+                }
+            }
+            all();
+        </script>
+    </body>
+</html>
