@@ -4,10 +4,122 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>class</title>
+        <title>Document</title>
     </head>
     <body>
         <script>
+            /**
+             *
+             *      通过 class 关键字创建类，类名习惯性首字母大写
+             *      类里面有个 constructor 函数，可以接收传递过来的参数，同时返回实例对象
+             *      constructor 函数只要 new 生成实例时，就会自动调用这个函数，就算不写，类也会自动生成这个函数
+             *      生成实例的 new 不能省略
+             *      语法规范，创建类不用小括号，生成实例要加小括号，构造函数不需要加 function
+             *
+             * */
+            class Star {
+                constructor(name, age, gender) {
+                    this.name = name;
+                    this.age = age;
+                    this.gender = gender;
+                }
+                sing(song) {
+                    console.log(this.name + '的歌: ' + song);
+                }
+            }
+            let ldh = new Star('刘德华', 55, '男');
+            let myf = new Star('梅艳芳', 54, '女');
+            console.log(ldh);
+            console.log(myf);
+            ldh.sing('冰雨');
+            myf.sing('女人花');
+
+            class Point {
+                constructor(name, age) {
+                    this.name = name;
+                    this.age = age;
+                }
+                toString() {
+                    console.log(`${this.name}, ${this.age}`);
+                }
+                say() {
+                    console.log(`my name is ${this.name}`);
+                }
+                speak() {
+                    console.log(`my age is ${this.age}`);
+                }
+            }
+            let p = new Point('david', 25);
+            let p1 = new Point('lily', 22);
+            let p2 = new Point('tom', 30);
+            p.toString();
+            p1.say();
+            p2.speak();
+
+            class Foo {
+                constructor() {
+                    return Object.create(null);
+                }
+            }
+            // 类不存在变量提升，name 属性返回跟在 class 关键字后面的类名
+            let foo = new Foo();
+            let rs = foo instanceof Foo;
+            console.log(rs);
+            console.log(foo);
+            console.log(Foo);
+            console.log(Foo.name);
+
+            let MyClass = class {
+                constructor() {}
+                set prop(value) {
+                    console.log('setter:' + value);
+                }
+                get prop() {
+                    return 'getter';
+                }
+            };
+            let init = new MyClass();
+            init.prop = 10;
+            console.log(init.prop);
+
+            let person = new (class {
+                constructor(name) {
+                    this.name = name;
+                }
+                sayName() {
+                    console.log(this.name);
+                }
+            })('张三');
+            person.sayName();
+
+            // 静态属性，class 自身的属性，不是定义在实例对象上的属性
+            class Prop {
+                static num = 10;
+                constructor() {
+                    console.log(Prop.num);
+                }
+            }
+            let prop = new Prop();
+            prop.constructor;
+
+            // class 的私有属性和方法
+            class Private {
+                #a;
+                #b;
+                constructor(a, b) {
+                    this.#a = a;
+                    this.#b = b;
+                }
+                #sum() {
+                    return this.#a + this.#b;
+                }
+                num() {
+                    console.log(this.#sum());
+                }
+            }
+            let pv = new Private(10, 20);
+            pv.num();
+
             class Counter {
                 count = 0;
                 get value() {
