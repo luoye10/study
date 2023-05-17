@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            /**
+             *
+             *  继承(inheritance)
+             *      如果一个类别 B继承自另一个类别 A，B就是 A的子类，A是 B 的父类
+             *
+             *      优点
+             *          可以使子类具有父类别的属性和方法
+             *
+             *
+             */
+            class Car {
+                constructor(color, speed) {
+                    this.color = color;
+                    this.speed = speed;
+                }
+            }
+            class Truck extends Car {
+                constructor(color, speed) {
+                    super(color, speed);
+                    this.color = 'black';
+                    this.Container = true;
+                }
+            }
+
+            // 原型链继承
+            // 每一个构造函数都有一个原型对象，原型对象又包含一个指向构造函数的指针，实例则包含一个原型对象的指针
+            // 实例使用的是同一个原型对象，内存空间是共享的
+            function Parent() {
+                this.name = 'parent1';
+                this.play = [1, 2, 3];
+            }
+            function Child() {
+                this.type = 'child1';
+            }
+            Child.prototype = new Parent();
+            let child1 = new Child();
+            let s1 = new Child(),
+                s2 = new Child();
+            s1.play.push(4);
+            console.log(child1.name, child1.play, child1.type);
+
+            // 构造函数继承
+            // 父类原型对象中一旦存在父类之前自己定义的方法，那么子类将无法继承这些方法
+            // 父类的引用属性不会被共享，但是只能继承父类的实例属性和方法，不能继承原型属性或者方法
+            function Parent2() {
+                this.name = 'parent2';
+            }
+
+            Parent2.prototype.getName = function () {
+                return this.name;
+            };
+
+            function Child2() {
+                Parent2.call(this);
+                this.type = 'child2';
+            }
+
+            let child2 = new Child2();
+            console.log(child2);
+            // console.log(child2.getName());
+
+            // 组合继承
+            function Parent3() {
+                this.name = 'parent3';
+                this.play = [1, 2, 3];
+            }
+
+            Parent3.prototype.getName = function () {
+                return this.name;
+            };
+            function Child3() {
+                // 第二次调用 Parent3()
+                Parent3.call(this);
+                this.type = 'child3';
+            }
+
+            // 第一次调用 Parent3()
+            Child3.prototype = new Parent3();
+            // 手动挂上构造器，指向自己的构造函数
+            Child3.prototype.constructor = Child3;
+            var s3 = new Child3();
+            var s4 = new Child3();
+            s3.play.push(4);
+            console.log(s3.play, s4.play); // 不互相影响
+            console.log(s3.getName()); // 正常输出'parent3'
+            console.log(s4.getName()); // 正常输出'parent3'
+
+            // 原型式继承
+            // 借助 Object.create()方法实现普通对象的继承
+            // 实现的是浅拷贝，多个实例的引用类型属性指向相同的内存，存在篡改的可能
+            let parent4 = {
+                name: 'parent4',
+                friends: ['p1', 'p2', 'p3'],
+                getName: function () {
+                    return this.name;
+                }
+            };
+
+            let person4 = Object.create(parent4);
+            person4.name = 'tom';
+            person4.friends.push('jerry');
+
+            let person5 = Object.create(parent4);
+            person5.friends.push('lucy');
+
+            console.log(person4.name); // tom
+            console.log(person4.name === person4.getName()); // true
+            console.log(person5.name); // parent4
+            console.log(person4.friends); // ["p1", "p2", "p3","jerry","lucy"]
+            console.log(person5.friends); // ["p1", "p2", "p3","jerry","lucy"]
+        </script>
+    </body>
+</html>
