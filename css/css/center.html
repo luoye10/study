@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>元素水平垂直居中</title>
+        <style>
+            .parent {
+                position: relative;
+                width: 200px;
+                height: 200px;
+                border: 1px solid red;
+                margin-top: 10px;
+            }
+            .child {
+                /* 绝对定位配合 transform 实现 */
+                width: 50px;
+                height: 50px;
+                background: #bcf;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .item {
+                width: 200px;
+                height: 200px;
+                border: 1px solid red;
+                margin-top: 10px;
+                display: flex;
+            }
+            .index {
+                /* 父元素 flex 布局，子元素 margin:auto 配合实现 */
+                width: 50px;
+                height: 50px;
+                background: #a6f;
+                margin: auto;
+            }
+
+            .flex {
+                /* flex 布局 */
+                width: 200px;
+                height: 200px;
+                border: 1px solid red;
+                margin-top: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .center {
+                width: 50px;
+                height: 50px;
+                background: #afc;
+            }
+
+            .container {
+                position: relative;
+                width: 200px;
+                height: 200px;
+                border: 1px solid red;
+                margin-top: 10px;
+            }
+            .list {
+                /* 绝对定位配合 margin:auto 的实现 */
+                width: 50px;
+                height: 50px;
+                background: #f91;
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="parent">
+            <div class="child"></div>
+        </div>
+        <div class="item">
+            <div class="index"></div>
+        </div>
+        <div class="flex">
+            <div class="center"></div>
+        </div>
+        <div class="container">
+            <div class="list"></div>
+        </div>
+    </body>
+</html>
