@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            div {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            let speed = 0,
+                s = 0,
+                flag = true,
+                f = false;
+            let el = create('div');
+            function test() {
+                el.style.background = color();
+                el.style.backgroundImage = ' radial-gradient(#fff 50% , ' + color() + ')';
+                document.body.appendChild(el);
+            }
+            test();
+            setInterval(() => {
+                if (flag) {
+                    speed += 20;
+                } else {
+                    speed -= 20;
+                }
+                if (speed + 100 >= window.innerWidth - 10) {
+                    flag = false;
+                    test();
+                }
+                if (speed <= 0) {
+                    flag = true;
+                    test();
+                }
+                if (f) {
+                    s += 10;
+                } else {
+                    s -= 10;
+                }
+                if (s + 100 >= window.innerHeight - 10) {
+                    f = false;
+                    test();
+                }
+                if (s <= 0) {
+                    f = true;
+                    test();
+                }
+                el.style.left = speed + 'px';
+                el.style.top = s + 'px';
+            }, 100);
+            function create(item) {
+                return document.createElement(item);
+            }
+            function color() {
+                return '#' + Math.random().toString(16).slice(2, 8);
+            }
+        </script>
+    </body>
+</html>
