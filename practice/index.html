@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .item {
+                width: 2px;
+                height: 5px;
+                background: #409eff;
+                position: absolute;
+                left: 400px;
+                top: 50px;
+            }
+            .list {
+                width: 5px;
+                height: 2px;
+                background: #409eff;
+                opacity: 0;
+                position: absolute;
+                top: 50px;
+            }
+            .test {
+                width: 2px;
+                height: 5px;
+                background: #409eff;
+                opacity: 0;
+                position: absolute;
+                transform: rotateY(180deg);
+                transform-origin: 0 0;
+            }
+            .line {
+                width: 5px;
+                height: 2px;
+                background: #409eff;
+                opacity: 0;
+                position: absolute;
+                left: 400px;
+                transform: rotateX(180deg);
+                transform-origin: 0 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="item"></div>
+        <div class="list"></div>
+        <div class="test"></div>
+        <div class="line"></div>
+        <script>
+            let item = getItem('item'),
+                list = getItem('list'),
+                test = getItem('test'),
+                line = getItem('line'),
+                left = getNum(item, 'left'),
+                t = getNum(item, 'top'),
+                w = getNum(item, 'width'),
+                h = getNum(list, 'height');
+            let speed = 10;
+            let num = 300;
+            carryItem();
+            function carryItem() {
+                w = 2;
+                let timer = setInterval(() => {
+                    w += speed;
+                    item.style.width = w + 'px';
+                    let l = left + w;
+                    if (w >= num) {
+                        clearInterval(timer);
+                        carryList(l);
+                    }
+                }, 50);
+            }
+            function carryList(param) {
+                list.style.left = param + 'px';
+                list.style.opacity = 1;
+                h = 2;
+                let timer = setInterval(() => {
+                    h += speed;
+                    list.style.height = h + 'px';
+                    let v = t + h;
+                    if (h >= num) {
+                        clearInterval(timer);
+                        carryTest(param, v);
+                    }
+                }, 50);
+            }
+            function carryTest(m, n) {
+                test.style.left = m + 5 + 'px';
+                test.style.top = n + 'px';
+                test.style.opacity = 1;
+                w = 2;
+                let timer = setInterval(() => {
+                    w += speed;
+                    test.style.width = w + 'px';
+                    if (w >= num) {
+                        clearInterval(timer);
+                        carryLine(n);
+                    }
+                }, 50);
+            }
+            function carryLine(param) {
+                line.style.top = param + 5 + 'px';
+                line.style.opacity = 1;
+                h = 2;
+                let timer = setInterval(() => {
+                    h += speed;
+                    line.style.height = h + 'px';
+                    if (h >= num) {
+                        clearInterval(timer);
+                        lineDown();
+                    }
+                }, 50);
+            }
+            function lineDown() {
+                downCommon(line, 'height', h, testDown);
+            }
+            function testDown() {
+                downCommon(test, 'width', w, listDown);
+            }
+            function listDown() {
+                height = 302;
+                downCommon(list, 'height', h, itemDown);
+            }
+            function itemDown() {
+                width = 302;
+                downCommon(item, 'width', w, carryItem);
+            }
+            function downCommon(ele, str, name, callback) {
+                let timer = setInterval(() => {
+                    name -= speed;
+                    ele.style[str] = name + 'px';
+                    if (name <= 0) {
+                        clearInterval(timer);
+                        callback();
+                        if (ele != item) {
+                            ele.style.opacity = 0;
+                        }
+                    }
+                }, 50);
+            }
+            function getItem(ele) {
+                return document.getElementsByClassName(ele)[0];
+            }
+            function getNum(ele, name) {
+                return parseInt(window.getComputedStyle(ele)[name]);
+            }
+        </script>
+    </body>
+</html>
