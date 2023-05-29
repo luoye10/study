@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            :root {
+                --h: 400px;
+                --w: 200px;
+            }
+            .box {
+                width: var(--h);
+                height: var(--h);
+                margin: 50px auto;
+                border: 1px solid red;
+                display: flex;
+                .item {
+                    margin: auto;
+                    width: var(--w);
+                    height: var(--w);
+                    border: 1px dashed pink;
+                    display: flex;
+                    .list {
+                        margin: auto;
+                        width: 100px;
+                        height: 100px;
+                        border: 1px dotted green;
+                    }
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <div class="item">
+                <div class="list"></div>
+            </div>
+        </div>
+    </body>
+</html>
