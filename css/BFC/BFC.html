@@ -1,63 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BFC</title>
-    <style>
-        /* 
-            BFC  Block Formatting Context(块级格式化上下文)
-                具有 BFC 特性的元素可以看作是隔离了的独立容器，
-                容器里面的元素不会在布局上影响到外面的元素，
-                并且 BFC 具有普通容器所没有的一些特性 
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>BFC</title>
+        <style>
+            div {
+                margin: 0;
+                padding: 0;
+            }
+            /* 
+                BFC  Block Formatting Context(块级格式化上下文)
+                    具有 BFC 特性的元素可以看作是隔离了的独立容器，
+                    容器里面的元素不会在布局上影响到外面的元素，
+                    并且 BFC 具有普通容器所没有的一些特性 
 
-            通过一些特殊的方式开启元素的 BFC
-                1、设置元素的浮动
-                2、将元素设置为行内块元素  
-                3、将元素的 overflow 设置为除了 visible 以外的值 (hidden、auto、scroll)  
-        */
-        .box{
+                触发 BFC
+                    浮动元素：float 除 none 以外的值
+                    绝对定位元素：position(absolute、fixed)
+                    display 为 inline-block、table-cells、flex
+                    overflow 设置为除了 visible 以外的值 (hidden、auto、scroll)
+            */
             /* 同一个 BFC 下外边距会发生折叠 */
-            width: 100px;
-            height: 100px;
-            background: aqua;
-            margin: 100px;
-        }
-        .container{
-            border: 5px solid red;
-            margin: 10px;
+            .box {
+                width: 100px;
+                height: 100px;
+                background: aqua;
+                margin: 100px;
+            }
             /* BFC 可以包含浮动的元素(清除浮动) */
-            overflow: hidden;
-        }
-        .item{
-            width: 100px;
-            height: 100px;
-            background: #adf;
-            float: left;
-        }
-        .inner{
-            width: 100px;
-            height: 100px;
-            background: #aaa;
-            float: left;
-        }
-        .outer{
-            /* width: 100px; */
-            height: 200px;
-            background: #6fa;
+            .container {
+                border: 1px solid #409eff;
+                margin: 10px;
+                overflow: hidden;
+            }
+            .item {
+                width: 100px;
+                height: 100px;
+                background: #adf;
+                float: left;
+            }
             /* BFC 可以阻止元素被浮动元素覆盖 */
-            overflow: hidden;
-        }
-    </style>
-</head>
-<body>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="container">
-        <div class="item"></div>
-    </div>
-    <div class="inner">我是一个左浮动的元素</div>
-    <div class="outer">我是一个没有被浮动覆盖的元素</div>
-</body>
+            .inner {
+                width: 100px;
+                height: 100px;
+                background: #adf;
+                float: left;
+            }
+            .outer {
+                height: 200px;
+                background: #6fd;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="container">
+            <div class="item"></div>
+        </div>
+        <div class="inner">我是一个左浮动的元素</div>
+        <div class="outer">我是一个没有被浮动覆盖的元素</div>
+    </body>
 </html>
