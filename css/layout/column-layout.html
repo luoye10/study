@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>分栏布局</title>
+        <!-- column-count: 分栏的个数
+        column-width: 分栏的宽度
+        column-gap: 分栏的间距
+        column-rule: 分栏的边线
+        column-span: 合并分栏
+        注：column-count 和 column-width 不要一起设置。 -->
+        <style>
+            .box {
+                width: 500px;
+                height: 300px;
+                border: 1px solid #409eff;
+                margin: 50px auto;
+                column-count: 4;
+                column-gap: 20px;
+                column-rule: 1px dashed aqua;
+                text-align: center;
+            }
+            h2 {
+                column-span: all;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <h2>打好武汉保卫战</h2>
+            <p>
+                “听了习近平总书记的重要讲话，特别受鼓舞，特别有信心！”“总书记的话说到了我们心坎上，听了倍感温暖，倍添动力！”“我们要坚定必胜信念，继续毫不放松抓紧抓实抓细各项防控工作。”
+            </p>
+            <p>
+                连日来，习近平总书记在统筹推进新冠肺炎疫情防控和经济社会发展工作部署会议上的重要讲话，为武汉广大干部群众提振抗击疫情必胜信心。大家纷纷表示，坚决贯彻落实习近平总书记重要讲话精神，同时间赛跑，与病魔较量，坚决打好湖北保卫战、武汉保卫战。
+            </p>
+        </div>
+    </body>
+</html>
