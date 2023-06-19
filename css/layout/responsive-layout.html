@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>响应式布局</title>
+        <style>
+            .box {
+                width: 100px;
+                height: 100px;
+            }
+            @media all and (max-width: 500px) {
+                .box {
+                    background: #0f6;
+                }
+            }
+            @media all and (min-width: 500px) and (max-width: 800px) {
+                .box {
+                    background: #360a36;
+                }
+            }
+            @media all and (min-width: 800px) {
+                .box {
+                    background: #270add;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 利用媒体查询，即 media queries，可以针对不同的媒体类型定义不同的样式，从而实现响应式布局 -->
+        <div class="box"></div>
+    </body>
+</html>
