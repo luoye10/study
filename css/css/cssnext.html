@@ -8,15 +8,21 @@
         <style>
             :root {
                 --c: #6cf;
+                --f: 1rem;
+                --t: center;
+                --w: 100px;
             }
             .box {
-                width: 100px;
-                height: 100px;
+                width: var(--w);
+                height: var(--w);
                 border: 1px solid var(--c);
+                font-size: calc(var(--f) * 2);
+                text-align: var(--t);
+                line-height: var(--w);
             }
         </style>
     </head>
     <body>
-        <div class="box"></div>
+        <div class="box">文字</div>
     </body>
 </html>
