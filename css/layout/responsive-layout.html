@@ -10,25 +10,60 @@
                 width: 100px;
                 height: 100px;
             }
-            @media all and (max-width: 500px) {
+            @media all and (min-width: 500px) {
                 .box {
                     background: #0f6;
                 }
             }
-            @media all and (min-width: 500px) and (max-width: 800px) {
+            @media all and (min-width: 800px) {
                 .box {
                     background: #360a36;
                 }
             }
-            @media all and (min-width: 800px) {
+            @media all and (min-width: 1000px) {
                 .box {
                     background: #270add;
+                }
+            }
+            .item {
+                width: 100px;
+                height: 100px;
+                margin: 10px;
+            }
+            @media not all and (max-width: 500px) {
+                .item {
+                    background: #6af;
+                }
+            }
+            @media all and (orientation: portrait) {
+                .item {
+                    background: #9f1add;
+                }
+            }
+            @media all and (orientation: landscape) {
+                .item {
+                    background: #f19;
                 }
             }
         </style>
     </head>
     <body>
-        <!-- 利用媒体查询，即 media queries，可以针对不同的媒体类型定义不同的样式，从而实现响应式布局 -->
+        <!-- 利用媒体查询，即 media queries，可以针对不同的媒体类型定义不同的样式，从而实现响应式布局 
+            媒体类型
+                取值                含义
+                all             用于所有设备
+                print           用于打印机和打印预览
+                screen          用于电脑屏幕，平板电脑，智能手机等
+                speech          用于屏幕阅读器等发声设备
+
+            常见选项
+                媒体类型
+                and、not
+                min-width、max-width
+                orientation: portrait(竖屏)、orientation: landscape(横屏)
+                <link>
+        -->
         <div class="box"></div>
+        <div class="item"></div>
     </body>
 </html>
