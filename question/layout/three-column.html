@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>三栏布局</title>
+        <style>
+            html,
+            body,
+            div {
+                margin: 0;
+                padding: 0;
+            }
+            :root {
+                --w: 100px;
+            }
+            /* 
+                将容器设置为 display: flex
+                将中间设置为 flex: 1
+                左右两边宽度固定
+            */
+            .item {
+                height: var(--w);
+                display: flex;
+                .left,
+                .main,
+                .right {
+                    height: var(--w);
+                }
+                .left {
+                    width: 150px;
+                    background: #409eff;
+                }
+                .right {
+                    width: 200px;
+                    background: aqua;
+                }
+                .main {
+                    flex: 1;
+                    background: #09fa09;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="item">
+            <div class="left"></div>
+            <div class="main"></div>
+            <div class="right"></div>
+        </div>
+    </body>
+</html>
