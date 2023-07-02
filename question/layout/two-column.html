@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>两栏布局</title>
+        <style>
+            html,
+            body,
+            div {
+                margin: 0;
+                padding: 0;
+            }
+            :root {
+                --w: 100px;
+            }
+            /* flex 弹性布局 */
+            .box {
+                height: var(--w);
+                display: flex;
+                .left {
+                    width: 200px;
+                    background: aqua;
+                }
+                .right {
+                    flex: 1;
+                    background: #409eff;
+                }
+            }
+            /**
+                利用 float 使左侧左浮动
+                右边用 margin-left 撑开
+                为父元素添加 BFC，防止下方元素飞到上方
+            */
+            .item {
+                height: var(--w);
+                margin-top: 10px;
+                overflow: hidden;
+                .left {
+                    float: left;
+                    width: var(--w);
+                    height: var(--w);
+                    background: #afd;
+                }
+                .right {
+                    height: var(--w);
+                    margin-left: var(--w);
+                    background: #6af;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+        <div class="item">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+    </body>
+</html>
